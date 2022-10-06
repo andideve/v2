@@ -1,4 +1,4 @@
-export const API_URI = 'https://api-andideve-com.herokuapp.com';
+export const API_URI = 'https://v2-api.up.railway.app';
 
 export const SITE_PATHS = {
   about: '/about',
