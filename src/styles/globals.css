@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  @apply text-[14px] lg:text-[16px];
+}
+
+.grid-container {
+  @apply grid grid-cols-4 gap-x-4 md:grid-cols-8 md:gap-x-8 lg:grid-cols-12;
+}
