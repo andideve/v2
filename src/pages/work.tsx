@@ -50,6 +50,7 @@ export default function Work({ author, projects, tags }: PageProps) {
                 variant={finder.isActive(tag) ? 'filled' : 'gray'}
                 rounded="full"
                 className="relative mt-2 ml-[.875rem]"
+                disabled={finder.isDisabledOption(tag)}
               >
                 {tag}
                 <input
