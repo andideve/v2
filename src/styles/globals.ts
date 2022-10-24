@@ -44,7 +44,7 @@ const globals = ({ config: { colorMode } }: Theme): CSSObject => ({
     top: UI.navbarH,
     height: 1,
     background: 'var(--ds-colors-foreground-primary)',
-    zIndex: 1031,
+    zIndex: 10000,
     '.peg': {
       display: 'none',
     },

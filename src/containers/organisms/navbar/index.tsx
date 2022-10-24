@@ -67,7 +67,7 @@ export default function Navbar({
             isOpen={disclosure.isOpen}
             duration={150}
             placement="top"
-            inset={{ top: `calc(${UI.navbarH} + 1px)` }}
+            inset={{ top: UI.navbarH }}
             zIndex={9999}
             unmountOnCollapse
           >
