@@ -3,8 +3,8 @@ import React, { useMemo } from 'react';
 import { Navbar as Nav } from '@andideve/ds-navbar';
 import clsx from 'clsx';
 
-import useNavlink from '../../../hooks/use-navlink';
-import { Menu } from '../../../types/defaults';
+import useNavlink from '@/hooks/use-navlink';
+import { Menu } from '@/types/defaults';
 
 export function NavLink({
   children,

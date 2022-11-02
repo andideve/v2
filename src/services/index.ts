@@ -1,10 +1,10 @@
 import axios, { AxiosResponse } from 'axios';
 
-import getEnv from '../utils/server/env';
-import { Author } from '../types/defaults';
-import { Project } from '../types/project';
-import { Linktree } from '../types/linktree';
-import { Email } from '../types/email';
+import getEnv from '@/utils/server/env';
+import { Author } from '@/types/defaults';
+import { Project } from '@/types/project';
+import { Linktree } from '@/types/linktree';
+import { Email } from '@/types/email';
 
 const Services = {
   async getAuthor(): Promise<Author> {

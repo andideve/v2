@@ -2,10 +2,10 @@ import React from 'react';
 import { Box, Typography } from '@andideve/design-system';
 import { Navbar as Nav } from '@andideve/ds-navbar';
 
-import NavLink from '../../../components/molecules/navbar/nav-link';
-import { IconButtons, IconButtonsProps } from '../../../components/molecules/navbar/icon-buttons';
-import { UI } from '../../../config/globals';
-import { Menu } from '../../../types/defaults';
+import NavLink from '@/components/molecules/navbar/nav-link';
+import { IconButtons, IconButtonsProps } from '@/components/molecules/navbar/icon-buttons';
+import { UI } from '@/config/globals';
+import { Menu } from '@/types/defaults';
 
 export default function Footer({
   brand,

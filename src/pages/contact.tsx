@@ -2,13 +2,13 @@ import React, { useCallback, useState } from 'react';
 import { Box, Input, Typography, Button, StyledInput } from '@andideve/design-system';
 import { useForm } from 'react-hook-form';
 
-import mergeGSSP from '../utils/server/merge-gssp';
+import mergeGSSP from '@/utils/server/merge-gssp';
 
-import { Page, gSSP, PageDataProps } from '../containers/templates/page';
-import Form from '../components/molecules/form';
-import { UI } from '../config/globals';
-import { Email } from '../types/email';
-import Services from '../services';
+import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
+import Form from '@/components/molecules/form';
+import { UI } from '@/config/globals';
+import { Email } from '@/types/email';
+import Services from '@/services';
 
 const TextArea = StyledInput.withComponent('textarea');
 

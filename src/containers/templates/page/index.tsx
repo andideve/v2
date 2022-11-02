@@ -6,12 +6,12 @@ import { Button } from '@andideve/design-system';
 import { FiArrowRight, FiBox, FiGithub, FiTwitter } from 'react-icons/fi';
 
 import Head from './Head';
-import Navbar from '../../../containers/organisms/navbar';
-import Footer from '../../organisms/footer';
-import { SITE_PATHS, UI, EXT_LINKS } from '../../../config/globals';
-import { PageMetadata, Author } from '../../../types/defaults';
+import Navbar from '@/containers/organisms/navbar';
+import Footer from '@/containers/organisms/footer';
+import { SITE_PATHS, UI, EXT_LINKS } from '@/config/globals';
+import { PageMetadata, Author } from '@/types/defaults';
 import { siteMenu, extendedSiteMenu } from '../../../_data/app/site-menu';
-import Services from '../../../services';
+import Services from '@/services';
 
 const cta = (
   <Link href={SITE_PATHS.contact} passHref>

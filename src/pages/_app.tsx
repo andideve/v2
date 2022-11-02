@@ -8,8 +8,8 @@ import { Provider, Theme } from '@andideve/design-system';
 import nProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
-import globalStyles from '../styles/globals';
-import nProgressConfig from '../config/nprogress';
+import globalStyles from '@/styles/globals';
+import nProgressConfig from '@/config/nprogress';
 
 const progress = nProgress.configure(nProgressConfig);
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from '@andideve/design-system';
 import { FiExternalLink } from 'react-icons/fi';
 
-import { Linktree } from '../../../types/linktree';
+import { Linktree } from '@/types/linktree';
 
 function List({ children }: { children?: React.ReactNode }) {
   return <ul className="list-none space-y-6">{children}</ul>;

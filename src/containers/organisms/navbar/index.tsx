@@ -4,15 +4,10 @@ import { Box } from '@andideve/design-system';
 import { Navbar as Nav } from '@andideve/ds-navbar';
 import { Drawer } from '@andideve/ds-drawer';
 
-import {
-  NavLink,
-  IconButtons,
-  IconButtonsProps,
-  MobileMenu,
-} from '../../../components/molecules/navbar';
-import useDisclosure from '../../../hooks/use-disclosure';
-import { UI } from '../../../config/globals';
-import { Menu } from '../../../types/defaults';
+import { NavLink, IconButtons, IconButtonsProps, MobileMenu } from '@/components/molecules/navbar';
+import useDisclosure from '@/hooks/use-disclosure';
+import { UI } from '@/config/globals';
+import { Menu } from '@/types/defaults';
 
 export default function Navbar({
   brand,

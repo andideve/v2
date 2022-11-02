@@ -1,14 +1,14 @@
 import React from 'react';
 import { Box, Table, Typography } from '@andideve/design-system';
 
-import mergeGSSP from '../utils/server/merge-gssp';
+import mergeGSSP from '@/utils/server/merge-gssp';
 
-import { Page, gSSP, PageDataProps } from '../containers/templates/page';
-import Tags from '../components/molecules/tags';
-import Links from '../components/molecules/links';
-import { UI } from '../config/globals';
-import { Project } from '../types/project';
-import Services from '../services';
+import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
+import Tags from '@/components/molecules/tags';
+import Links from '@/components/molecules/links';
+import { UI } from '@/config/globals';
+import { Project } from '@/types/project';
+import Services from '@/services';
 
 interface PageProps extends PageDataProps {
   projects: Project[];

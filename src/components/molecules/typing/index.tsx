@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
 import { Typography, TypographyProps } from '@andideve/design-system';
 
-import useTyping from '../../../hooks/use-typing';
+import useTyping from '@/hooks/use-typing';
 
 const blinkKeyframes = keyframes({
   '50%': { opacity: 0 },

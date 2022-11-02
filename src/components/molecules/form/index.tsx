@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@andideve/design-system';
 import clsx from 'clsx';
 
-import { UI } from '../../../config/globals';
+import { UI } from '@/config/globals';
 
 type FormProps = React.FormHTMLAttributes<HTMLFormElement>;
 type HTMLProps = React.HTMLAttributes<HTMLElement>;

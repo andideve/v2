@@ -1,13 +1,13 @@
 import React from 'react';
 import { Box, Typography } from '@andideve/design-system';
 
-import mergeGSSP from '../utils/server/merge-gssp';
+import mergeGSSP from '@/utils/server/merge-gssp';
 
-import { Page, gSSP, PageDataProps } from '../containers/templates/page';
-import Linktree from '../containers/organisms/linktree';
-import { UI } from '../config/globals';
-import { Linktree as LinktreeType } from '../types/linktree';
-import Services from '../services';
+import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
+import Linktree from '@/containers/organisms/linktree';
+import { UI } from '@/config/globals';
+import { Linktree as LinktreeType } from '@/types/linktree';
+import Services from '@/services';
 
 interface PageProps extends PageDataProps {
   linktrees: LinktreeType[];

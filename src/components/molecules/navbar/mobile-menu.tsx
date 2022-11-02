@@ -3,9 +3,9 @@ import React, { useMemo } from 'react';
 import { Box, Typography } from '@andideve/design-system';
 import clsx from 'clsx';
 
-import useNavlink from '../../../hooks/use-navlink';
-import { UI } from '../../../config/globals';
-import { Menu } from '../../../types/defaults';
+import useNavlink from '@/hooks/use-navlink';
+import { UI } from '@/config/globals';
+import { Menu } from '@/types/defaults';
 
 function List({ children }: { children?: React.ReactNode }) {
   return <ul className="list-none">{children}</ul>;

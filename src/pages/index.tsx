@@ -3,16 +3,16 @@ import React from 'react';
 import { Box, Button, Typography } from '@andideve/design-system';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
-import mergeGSSP from '../utils/server/merge-gssp';
+import mergeGSSP from '@/utils/server/merge-gssp';
 
-import { Page, gSSP, PageDataProps } from '../containers/templates/page';
-import Project from '../containers/organisms/project';
-import Typing from '../components/molecules/typing';
-import useShowLess from '../hooks/use-show-less';
-import { SITE_PATHS, UI } from '../config/globals';
-import { Author } from '../types/defaults';
-import { Project as ProjectType } from '../types/project';
-import Services from '../services';
+import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
+import Project from '@/containers/organisms/project';
+import Typing from '@/components/molecules/typing';
+import useShowLess from '@/hooks/use-show-less';
+import { SITE_PATHS, UI } from '@/config/globals';
+import { Author } from '@/types/defaults';
+import { Project as ProjectType } from '@/types/project';
+import Services from '@/services';
 
 interface PageProps extends PageDataProps {
   projects: ProjectType[];

@@ -2,9 +2,9 @@ import React, { useMemo } from 'react';
 import { Box, Typography } from '@andideve/design-system';
 import { FiHexagon, FiFolder, FiFile } from 'react-icons/fi';
 
-import Tags from '../../../components/molecules/tags';
-import Links from '../../../components/molecules/links';
-import { Project } from '../../../types/project';
+import Tags from '@/components/molecules/tags';
+import Links from '@/components/molecules/links';
+import { Project } from '@/types/project';
 
 function getSVG({ archived, github, external }: Pick<Project, 'archived' | 'github' | 'external'>) {
   if (archived) return FiFolder;

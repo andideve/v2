@@ -2,15 +2,15 @@ import React from 'react';
 import { Box, Typography, Button } from '@andideve/design-system';
 import { FiPlus } from 'react-icons/fi';
 
-import mergeGSSP from '../utils/server/merge-gssp';
+import mergeGSSP from '@/utils/server/merge-gssp';
 
-import { Page, gSSP, PageDataProps } from '../containers/templates/page';
-import useShowMore from '../hooks/use-show-more';
-import useSearch from '../hooks/use-search';
-import { UI } from '../config/globals';
-import { Project as ProjectType } from '../types/project';
-import Services from '../services';
-import Project from '../containers/organisms/project';
+import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
+import Project from '@/containers/organisms/project';
+import useShowMore from '@/hooks/use-show-more';
+import useSearch from '@/hooks/use-search';
+import { UI } from '@/config/globals';
+import { Project as ProjectType } from '@/types/project';
+import Services from '@/services';
 
 interface PageProps extends PageDataProps {
   projects: ProjectType[];
