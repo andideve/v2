@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Typography } from '@andideve/design-system';
 
-import createGetSSP from '../utils/server/get-ssp';
+import mergeGSSP from '../utils/server/merge-gssp';
 
-import { Page, getPageProps, PageDataProps } from '../containers/templates/page';
+import { Page, gSSP, PageDataProps } from '../containers/templates/page';
 import Linktree from '../containers/organisms/linktree';
 import { UI } from '../config/globals';
 import { Linktree as LinktreeType } from '../types/linktree';
@@ -13,8 +13,10 @@ interface PageProps extends PageDataProps {
   linktrees: LinktreeType[];
 }
 
-export const getServerSideProps = createGetSSP(getPageProps, async () => ({
-  linktrees: await Services.getLinktrees().then((res) => res.linktrees),
+export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
+  props: {
+    linktrees: await Services.getLinktrees().then((res) => res.linktrees),
+  },
 }));
 
 export default function Links({ author, linktrees }: PageProps) {

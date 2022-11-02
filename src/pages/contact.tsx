@@ -2,9 +2,9 @@ import React, { useCallback, useState } from 'react';
 import { Box, Input, Typography, Button, StyledInput } from '@andideve/design-system';
 import { useForm } from 'react-hook-form';
 
-import createGetSSP from '../utils/server/get-ssp';
+import mergeGSSP from '../utils/server/merge-gssp';
 
-import { Page, getPageProps, PageDataProps } from '../containers/templates/page';
+import { Page, gSSP, PageDataProps } from '../containers/templates/page';
 import Form from '../components/molecules/form';
 import { UI } from '../config/globals';
 import { Email } from '../types/email';
@@ -14,7 +14,7 @@ const TextArea = StyledInput.withComponent('textarea');
 
 type PageProps = PageDataProps;
 
-export const getServerSideProps = createGetSSP(getPageProps);
+export const getServerSideProps = mergeGSSP<PageProps>(gSSP);
 
 export default function Links({ author }: PageProps) {
   const [loading, setLoading] = useState(false);

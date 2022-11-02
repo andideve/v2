@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import type { GetServerSideProps } from 'next';
 import React from 'react';
 import { Box, BoxProps, Theme } from '@andideve/design-system';
 import { Button } from '@andideve/design-system';
@@ -47,11 +48,11 @@ interface PageProps extends PageDataProps, PageMetadata {
   children?: React.ReactNode;
 }
 
-export async function getPageProps(): Promise<PageDataProps> {
-  return {
+export const gSSP: GetServerSideProps<PageDataProps> = async () => ({
+  props: {
     author: await Services.getAuthor(),
-  };
-}
+  },
+});
 
 export const Page: React.FC<PageProps> & { Section: typeof Section } = ({
   children,

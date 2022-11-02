@@ -2,9 +2,9 @@ import React from 'react';
 import { Box, Typography, Button } from '@andideve/design-system';
 import { FiPlus } from 'react-icons/fi';
 
-import createGetSSP from '../utils/server/get-ssp';
+import mergeGSSP from '../utils/server/merge-gssp';
 
-import { Page, getPageProps, PageDataProps } from '../containers/templates/page';
+import { Page, gSSP, PageDataProps } from '../containers/templates/page';
 import useShowMore from '../hooks/use-show-more';
 import useSearch from '../hooks/use-search';
 import { UI } from '../config/globals';
@@ -17,13 +17,15 @@ interface PageProps extends PageDataProps {
   tags: string[];
 }
 
-export const getServerSideProps = createGetSSP(getPageProps, async () => {
+export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => {
   const projects = await Services.getProjects({ archived: false, sort: 'DESC' }).then(
     (res) => res.projects,
   );
-  const tags = Array.from(new Set(projects.map((project) => project.tags).flat()));
+  const tags = Array.from(new Set(projects.map((project) => project.tags ?? []).flat()));
 
-  return { projects, tags };
+  return {
+    props: { projects, tags },
+  };
 });
 
 export default function Work({ author, projects, tags }: PageProps) {

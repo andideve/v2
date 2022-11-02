@@ -3,9 +3,9 @@ import React from 'react';
 import { Box, Button, Typography } from '@andideve/design-system';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
-import createGetSSP from '../utils/server/get-ssp';
+import mergeGSSP from '../utils/server/merge-gssp';
 
-import { Page, getPageProps, PageDataProps } from '../containers/templates/page';
+import { Page, gSSP, PageDataProps } from '../containers/templates/page';
 import Project from '../containers/organisms/project';
 import Typing from '../components/molecules/typing';
 import useShowLess from '../hooks/use-show-less';
@@ -18,10 +18,12 @@ interface PageProps extends PageDataProps {
   projects: ProjectType[];
 }
 
-export const getServerSideProps = createGetSSP(getPageProps, async () => ({
-  projects: await Services.getProjects({ archived: false, sort: 'DESC', limit: 9 }).then(
-    (res) => res.projects,
-  ),
+export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
+  props: {
+    projects: await Services.getProjects({ archived: false, sort: 'DESC', limit: 9 }).then(
+      (res) => res.projects,
+    ),
+  },
 }));
 
 function Hero({ author }: { author: Author }) {

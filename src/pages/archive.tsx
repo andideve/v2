@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Table, Typography } from '@andideve/design-system';
 
-import createGetSSP from '../utils/server/get-ssp';
+import mergeGSSP from '../utils/server/merge-gssp';
 
-import { Page, getPageProps, PageDataProps } from '../containers/templates/page';
+import { Page, gSSP, PageDataProps } from '../containers/templates/page';
 import Tags from '../components/molecules/tags';
 import Links from '../components/molecules/links';
 import { UI } from '../config/globals';
@@ -14,10 +14,12 @@ interface PageProps extends PageDataProps {
   projects: Project[];
 }
 
-export const getServerSideProps = createGetSSP(getPageProps, async () => ({
-  projects: await Services.getProjects({ archived: true, sort: 'DESC' }).then(
-    (res) => res.projects,
-  ),
+export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
+  props: {
+    projects: await Services.getProjects({ archived: true, sort: 'DESC' }).then(
+      (res) => res.projects,
+    ),
+  },
 }));
 
 export default function Archive({ author, projects }: PageProps) {
