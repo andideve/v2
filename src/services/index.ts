@@ -19,7 +19,7 @@ const Services = {
     return axios.get(`${getEnv().API_URI}/linktrees`).then((res) => res.data);
   },
   async postEmail(email: Email): Promise<AxiosResponse['data']> {
-    return axios.post(`${getEnv().API_URI}/email`, email).then((res) => res.data);
+    return axios.post('/api/email', email).then((res) => res.data);
   },
 };
 
