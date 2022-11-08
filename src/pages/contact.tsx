@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
 
-import { Page, Section, gSSP, PageDataProps } from '@/containers/templates/page';
+import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Form from '@/components/molecules/form';
 import { UI } from '@/config/globals';
 import { Email } from '@/types/email';
@@ -77,7 +77,7 @@ export default function Links({ author }: PageProps) {
 
   return (
     <Page author={author} title="Contact">
-      <Section containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
+      <Page.Section containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
         <Box as="header" mb={UI.frameY}>
           <Typography as="h2" size="6xl" className="font-bold">
             Hey! Wanna collaborate?
@@ -104,7 +104,7 @@ export default function Links({ author }: PageProps) {
             </Button>
           </Form.Footer>
         </Form>
-      </Section>
+      </Page.Section>
     </Page>
   );
 }

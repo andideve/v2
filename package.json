@@ -25,7 +25,6 @@
     "@emotion/styled": "^11.10.4",
     "axios": "^1.0.0",
     "clsx": "^1.2.1",
-    "dequal": "^2.0.3",
     "merge": "^2.1.1",
     "next": "12.3.1",
     "nprogress": "^0.2.0",

@@ -3,7 +3,7 @@ import { Box, Typography } from '@andideve/design-system';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
 
-import { Page, Section, gSSP, PageDataProps } from '@/containers/templates/page';
+import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Linktree from '@/containers/organisms/linktree';
 import { UI } from '@/config/globals';
 import { Linktree as LinktreeType } from '@/types/linktree';
@@ -22,7 +22,7 @@ export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
 export default function Links({ author, linktrees }: PageProps) {
   return (
     <Page author={author} title="Links">
-      <Section containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
+      <Page.Section containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
         <Box as="header" mb={UI.frameY}>
           <Typography as="h2" size="6xl" className="font-bold">
             Links
@@ -36,7 +36,7 @@ export default function Links({ author, linktrees }: PageProps) {
             <Linktree.Item key={i} {...linktree} />
           ))}
         </Linktree.List>
-      </Section>
+      </Page.Section>
     </Page>
   );
 }

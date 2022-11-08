@@ -3,7 +3,7 @@ import { Box, Table, Typography } from '@andideve/design-system';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
 
-import { Page, Section, gSSP, PageDataProps } from '@/containers/templates/page';
+import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Tags from '@/components/molecules/tags';
 import Links from '@/components/molecules/links';
 import { UI } from '@/config/globals';
@@ -25,7 +25,7 @@ export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
 export default function Archive({ author, projects }: PageProps) {
   return (
     <Page author={author} title="Archive">
-      <Section minHeight={`calc(100vh - ${UI.navbarH})`}>
+      <Page.Section minHeight={`calc(100vh - ${UI.navbarH})`}>
         <Box as="header" mb={UI.frameY}>
           <Typography as="h2" size="6xl" className="font-bold">
             Archive
@@ -64,7 +64,7 @@ export default function Archive({ author, projects }: PageProps) {
             </tbody>
           </Table>
         </div>
-      </Section>
+      </Page.Section>
     </Page>
   );
 }

@@ -5,7 +5,7 @@ import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
 
-import { Page, Section, gSSP, PageDataProps } from '@/containers/templates/page';
+import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Project from '@/containers/organisms/project';
 import Typing from '@/components/molecules/typing';
 import useShowLess from '@/hooks/use-show-less';
@@ -29,7 +29,7 @@ export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
 function Hero({ author }: { author: Author }) {
   const greeting = `Hello, I'm ${author.name}.`;
   return (
-    <Section
+    <Page.Section
       containerW={590}
       minHeight={`calc(100vh - ${UI.navbarH})`}
       className="flex flex-col justify-center text-center"
@@ -49,14 +49,14 @@ function Hero({ author }: { author: Author }) {
           {author.intro}
         </Typography>
       )}
-    </Section>
+    </Page.Section>
   );
 }
 
 function LatestProjects({ items }: { items: ProjectType[] }) {
   const { list, shouldRenderButton, isOpen, onToggle } = useShowLess(items, 3);
   return (
-    <Section>
+    <Page.Section>
       <header className="mb-12 text-center">
         <Typography as="h2" size="4xl" className="font-semibold">
           Latest my work
@@ -84,7 +84,7 @@ function LatestProjects({ items }: { items: ProjectType[] }) {
           </Button>
         </Box>
       )}
-    </Section>
+    </Page.Section>
   );
 }
 

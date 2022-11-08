@@ -4,7 +4,6 @@ import { Box, Typography } from '@andideve/design-system';
 import clsx from 'clsx';
 
 import useNavlink from '@/hooks/use-navlink';
-import memo from '@/utils/client/memo';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
 
@@ -12,7 +11,7 @@ function List({ children }: { children?: React.ReactNode }) {
   return <ul className="list-none">{children}</ul>;
 }
 
-const Item = memo<Menu>(({ label, to, exact }: Menu) => {
+function Item({ label, to, exact }: Menu) {
   const { isActive } = useNavlink();
   const active = useMemo(() => isActive(to, exact), [to, exact]);
   return (
@@ -37,10 +36,10 @@ const Item = memo<Menu>(({ label, to, exact }: Menu) => {
       </Link>
     </Box>
   );
-});
+}
 
-export const MobileMenu = memo<{ items: Menu[]; children?: React.ReactNode }>(
-  ({ children, items }) => (
+export function MobileMenu({ children, items }: { items: Menu[]; children?: React.ReactNode }) {
+  return (
     <Box
       height={`calc(100vh - ${UI.navbarH})`}
       backgroundColor="background.primary"
@@ -57,7 +56,7 @@ export const MobileMenu = memo<{ items: Menu[]; children?: React.ReactNode }>(
         </Box>
       )}
     </Box>
-  ),
-);
+  );
+}
 
 export default MobileMenu;

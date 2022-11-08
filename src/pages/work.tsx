@@ -4,7 +4,7 @@ import { FiPlus } from 'react-icons/fi';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
 
-import { Page, Section, gSSP, PageDataProps } from '@/containers/templates/page';
+import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Project from '@/containers/organisms/project';
 import useShowMore from '@/hooks/use-show-more';
 import useSearch from '@/hooks/use-search';
@@ -36,7 +36,7 @@ export default function Work({ author, projects, tags }: PageProps) {
   );
   return (
     <Page author={author} title="My Work">
-      <Section minHeight={`calc(100vh - ${UI.navbarH})`}>
+      <Page.Section minHeight={`calc(100vh - ${UI.navbarH})`}>
         <Box as="header" mb={UI.frameY}>
           <Typography as="h2" size="6xl" className="font-bold">
             My Work
@@ -83,7 +83,7 @@ export default function Work({ author, projects, tags }: PageProps) {
             </Button>
           </Box>
         )}
-      </Section>
+      </Page.Section>
     </Page>
   );
 }
