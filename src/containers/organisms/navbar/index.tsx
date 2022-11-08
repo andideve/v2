@@ -6,20 +6,16 @@ import { Drawer } from '@andideve/ds-drawer';
 
 import { NavLink, IconButtons, IconButtonsProps, MobileMenu } from '@/components/molecules/navbar';
 import useDisclosure from '@/hooks/use-disclosure';
+import memo from '@/utils/client/memo';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
 
-export default function Navbar({
-  brand,
-  menuItems,
-  iconButtons = [],
-  cta,
-}: {
+const Navbar = memo<{
   brand: string;
   menuItems: Menu[];
   iconButtons?: IconButtonsProps['items'];
   cta?: React.ReactNode;
-}) {
+}>(({ brand, menuItems, iconButtons = [], cta }) => {
   const disclosure = useDisclosure();
   return (
     <Nav
@@ -73,4 +69,6 @@ export default function Navbar({
       </div>
     </Nav>
   );
-}
+});
+
+export default Navbar;
