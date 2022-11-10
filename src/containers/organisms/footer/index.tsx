@@ -23,7 +23,7 @@ export default function Footer({
       as="footer"
       py={UI.frameY}
       px={UI.frameX}
-      backgroundColor="background.primary"
+      backgroundColor="background.elevated.primary"
       className="lg:text-center"
     >
       <hr />

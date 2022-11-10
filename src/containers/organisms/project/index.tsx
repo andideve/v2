@@ -21,8 +21,9 @@ function Item({ date, title, description, tags = [], github, external, archived 
   return (
     <Box
       as="article"
-      backgroundColor="background.secondary"
-      className="relative col-span-full md:col-span-4 flex flex-col p-6 rounded-md shadow"
+      borderColor="separator.default"
+      backgroundColor="background.elevated.primary"
+      className="relative col-span-full md:col-span-4 flex flex-col p-6 border rounded-md shadow"
     >
       <div className="mb-4 min-h-[2.625rem]">
         <SVG strokeWidth={1} className="w-11 h-11" style={{ color: 'var(--ds-colors-accent)' }} />

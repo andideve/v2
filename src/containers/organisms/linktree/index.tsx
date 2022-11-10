@@ -20,7 +20,7 @@ function Links({ items }: { items: Linktree['items'] }) {
             className="flex items-center justify-between py-[.875rem] px-6 rounded-md font-medium"
             style={{
               color: link.text_color,
-              backgroundColor: link.bg_color || 'var(--ds-colors-background-secondary)',
+              backgroundColor: link.bg_color || 'var(--ds-colors-background-elevated-secondary)',
             }}
           >
             {link.label}

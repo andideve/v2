@@ -2,7 +2,7 @@ import { Theme } from '@andideve/design-system';
 import { CSSObject } from '@emotion/react';
 import { UI } from '../config/globals';
 
-const globals = ({ config: { colorMode } }: Theme): CSSObject => ({
+const globals = ({ config: { colorMode }, colors }: Theme): CSSObject => ({
   '#__next': {
     display: 'flex',
     flexDirection: 'column',
@@ -11,15 +11,16 @@ const globals = ({ config: { colorMode } }: Theme): CSSObject => ({
   body: {
     cursor: 'default',
     fontFamily: String(['"SF Pro Text"', 'var(--ds-fonts-sans)']),
+    backgroundColor: colors.background.elevated.primary,
     transition: '.3s color ease, .3s background-color ease',
     '::-webkit-scrollbar': {
       width: 16,
     },
     '::-webkit-scrollbar-track': {
-      background: 'var(--ds-colors-background-primary)',
+      background: 'var(--ds-colors-background-elevated-primary)',
     },
     '::-webkit-scrollbar-thumb': {
-      border: '4px solid var(--ds-colors-background-primary)',
+      border: '4px solid var(--ds-colors-background-elevated-primary)',
       borderRadius: 9999,
       backgroundColor: colorMode === 'dark' ? 'var(--ds-colors-gray-1)' : 'hsl(0, 0%, 76%)',
     },

@@ -30,7 +30,7 @@ export default function Navbar({
       className="fixed inset-x-0 justify-between border-b border-solid backdrop-blur-xl"
     >
       <Box
-        backgroundColor="background.primary"
+        backgroundColor="background.elevated.primary"
         zIndex={-1}
         className="absolute inset-0 opacity-70"
       />

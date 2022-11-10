@@ -54,7 +54,7 @@ export default function Archive({ author, projects }: PageProps) {
                     </Typography>
                   </td>
                   <td className="hidden lg:table-cell">
-                    <Tags items={project.tags} />
+                    <Tags items={project.tags} bordered />
                   </td>
                   <td>
                     <Links github={project.github} external={project.external} />
