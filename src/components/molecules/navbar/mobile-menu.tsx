@@ -42,7 +42,7 @@ export function MobileMenu({ children, items }: { items: Menu[]; children?: Reac
   return (
     <Box
       height={`calc(100vh - ${UI.navbarH})`}
-      backgroundColor="background.primary"
+      backgroundColor="background.elevated.primary"
       className="overflow-y-auto"
     >
       <List>

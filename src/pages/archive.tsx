@@ -34,7 +34,7 @@ export default function Archive({ author, projects }: PageProps) {
             A big list of things I&apos;ve worked on.
           </Typography>
         </Box>
-        <div className="-mx-4">
+        <Box borderColor="separator.default" className="p-3 border rounded-xl">
           <Table hoverable>
             <thead>
               <tr>
@@ -47,7 +47,9 @@ export default function Archive({ author, projects }: PageProps) {
             <tbody>
               {projects.map((project, i) => (
                 <tr key={i}>
-                  <td>{new Date(project.date).getFullYear()}</td>
+                  <Box as="td" color="foreground.secondary">
+                    {new Date(project.date).getFullYear()}
+                  </Box>
                   <td>
                     <Typography as="span" size="lg" className="font-semibold">
                       {project.title}
@@ -63,7 +65,7 @@ export default function Archive({ author, projects }: PageProps) {
               ))}
             </tbody>
           </Table>
-        </div>
+        </Box>
       </Page.Section>
     </Page>
   );
