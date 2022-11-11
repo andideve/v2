@@ -12,11 +12,15 @@ function getSVG({ archived, github, external }: Pick<Project, 'archived' | 'gith
   return FiFile;
 }
 
-function List({ children }: { children?: React.ReactNode }) {
-  return <div className="grid-container gap-y-5 md:gap-y-8">{children}</div>;
-}
-
-function Item({ date, title, description, tags = [], github, external, archived }: Project) {
+export default function ProjectItem({
+  date,
+  title,
+  description,
+  tags = [],
+  github,
+  external,
+  archived,
+}: Project) {
   const SVG = useMemo(() => getSVG({ archived, github, external }), [archived, github, external]);
   return (
     <Box
@@ -52,7 +56,3 @@ function Item({ date, title, description, tags = [], github, external, archived 
     </Box>
   );
 }
-
-const Project = { List, Item };
-
-export default Project;

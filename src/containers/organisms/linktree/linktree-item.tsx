@@ -4,11 +4,7 @@ import { FiExternalLink } from 'react-icons/fi';
 
 import { Linktree } from '@/types/linktree';
 
-function List({ children }: { children?: React.ReactNode }) {
-  return <ul className="list-none space-y-6">{children}</ul>;
-}
-
-function Links({ items }: { items: Linktree['items'] }) {
+function Links({ items }: Pick<Linktree, 'items'>) {
   return (
     <ul className="list-none space-y-4">
       {items.map((link, i) => (
@@ -32,7 +28,7 @@ function Links({ items }: { items: Linktree['items'] }) {
   );
 }
 
-function Item({ category, items }: Linktree) {
+export default function LinktreeItem({ category, items }: Linktree) {
   return (
     <li>
       <Typography as="h3" color="foreground.secondary" className="mb-[.875rem]">
@@ -42,7 +38,3 @@ function Item({ category, items }: Linktree) {
     </li>
   );
 }
-
-const Linktree = { List, Item };
-
-export default Linktree;
