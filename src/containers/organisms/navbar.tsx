@@ -1,26 +1,32 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { memo } from 'react';
 import { Box } from '@andideve/design-system';
 import { Navbar as Nav } from '@andideve/ds-navbar';
 import { Drawer } from '@andideve/ds-drawer';
+import { dequal } from 'dequal';
 
 import { NavLink, IconButtons, IconButtonsProps, MobileMenu } from '@/components/molecules/navbar';
-import useDisclosure from '@/hooks/use-disclosure';
+import { DisclosureContext } from '@/context/disclosure';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
 
-export default function Navbar({
-  brand,
-  menuItems,
-  iconButtons = [],
-  cta,
-}: {
+interface NavbarProps {
   brand: string;
   menuItems: Menu[];
   iconButtons?: IconButtonsProps['items'];
   cta?: React.ReactNode;
-}) {
-  const disclosure = useDisclosure();
+}
+
+function propsAreEqual(prev: NavbarProps, next: NavbarProps) {
+  return [
+    prev.brand === next.brand,
+    dequal(prev.menuItems, next.menuItems),
+    dequal(prev.iconButtons, next.iconButtons),
+    prev.cta === next.cta,
+  ].every(Boolean);
+}
+
+const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [], cta }) {
   return (
     <Nav
       px={UI.frameX}
@@ -50,27 +56,33 @@ export default function Navbar({
       </div>
       <div className="nav__end flex space-x-12">
         <IconButtons items={iconButtons} />
-        <div className="block lg:hidden">
-          <Nav.Toggle
-            aria-controls="main-nav-drawer"
-            className="-mx-3"
-            expanded={disclosure.isOpen}
-            onClick={disclosure.onToggle}
-          />
-          <Drawer
-            id="main-nav-drawer"
-            isOpen={disclosure.isOpen}
-            duration={150}
-            placement="top"
-            inset={{ top: UI.navbarH }}
-            zIndex={9999}
-            unmountOnCollapse
-          >
-            <MobileMenu items={menuItems}>{cta}</MobileMenu>
-          </Drawer>
-        </div>
+        <DisclosureContext>
+          {({ isOpen, onToggle }) => (
+            <div className="block lg:hidden">
+              <Nav.Toggle
+                aria-controls="main-nav-drawer"
+                className="-mx-3"
+                expanded={isOpen}
+                onClick={onToggle}
+              />
+              <Drawer
+                id="main-nav-drawer"
+                isOpen={isOpen}
+                duration={150}
+                placement="top"
+                inset={{ top: UI.navbarH }}
+                zIndex={9999}
+                unmountOnCollapse
+              >
+                <MobileMenu items={menuItems}>{cta}</MobileMenu>
+              </Drawer>
+            </div>
+          )}
+        </DisclosureContext>
         {cta && <div className="hidden lg:block">{cta}</div>}
       </div>
     </Nav>
   );
-}
+}, propsAreEqual);
+
+export default Navbar;

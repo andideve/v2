@@ -8,7 +8,7 @@ import mergeGSSP from '@/utils/server/merge-gssp';
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Project from '@/containers/organisms/project';
 import Typing from '@/components/molecules/typing';
-import useShowLess from '@/hooks/use-show-less';
+import { ShowLessContext } from '@/context/show-less';
 import { SITE_PATHS, UI } from '@/config/globals';
 import { Author } from '@/types/defaults';
 import { Project as ProjectType } from '@/types/project';
@@ -54,7 +54,6 @@ function Hero({ author }: { author: Author }) {
 }
 
 function LatestProjects({ items }: { items: ProjectType[] }) {
-  const { list, shouldRenderButton, isOpen, onToggle } = useShowLess(items, 3);
   return (
     <Page.Section>
       <header className="mb-12 text-center">
@@ -67,23 +66,29 @@ function LatestProjects({ items }: { items: ProjectType[] }) {
           </Typography>
         </Link>
       </header>
-      <Project.List>
-        {list.map((project, i) => (
-          <Project.Item key={i} {...project} />
-        ))}
-      </Project.List>
-      {shouldRenderButton && (
-        <Box as="footer" mt={UI.frameY} className="text-center">
-          <Button
-            size="lg"
-            variant="tinted"
-            iconRight={isOpen ? <FiChevronUp /> : <FiChevronDown />}
-            onClick={onToggle}
-          >
-            {isOpen ? 'Show less' : 'Show more'}
-          </Button>
-        </Box>
-      )}
+      <ShowLessContext items={items} limit={3}>
+        {({ list, shouldRenderButton, isOpen, onToggle }) => (
+          <>
+            <Project.List>
+              {list.map((project, i) => (
+                <Project.Item key={i} {...(project as ProjectType)} />
+              ))}
+            </Project.List>
+            {shouldRenderButton && (
+              <Box as="footer" mt={UI.frameY} className="text-center">
+                <Button
+                  size="lg"
+                  variant="tinted"
+                  iconRight={isOpen ? <FiChevronUp /> : <FiChevronDown />}
+                  onClick={onToggle}
+                >
+                  {isOpen ? 'Show less' : 'Show more'}
+                </Button>
+              </Box>
+            )}
+          </>
+        )}
+      </ShowLessContext>
     </Page.Section>
   );
 }

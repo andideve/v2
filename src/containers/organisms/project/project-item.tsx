@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, memo } from 'react';
 import { Box, Typography } from '@andideve/design-system';
 import { FiHexagon, FiFolder, FiFile } from 'react-icons/fi';
+import { dequal } from 'dequal';
 
 import Tags from '@/components/molecules/tags';
 import Links from '@/components/molecules/links';
@@ -12,7 +13,19 @@ function getSVG({ archived, github, external }: Pick<Project, 'archived' | 'gith
   return FiFile;
 }
 
-export default function ProjectItem({
+function propsAreEqual(prev: Project, next: Project) {
+  return [
+    prev.date === next.date,
+    prev.title === next.title,
+    prev.description === next.description,
+    dequal(prev.tags, next.tags),
+    prev.github === next.github,
+    prev.external === next.external,
+    prev.archived === next.archived,
+  ].every(Boolean);
+}
+
+const ProjectItem = memo(function ({
   date,
   title,
   description,
@@ -55,4 +68,7 @@ export default function ProjectItem({
       </footer>
     </Box>
   );
-}
+},
+propsAreEqual);
+
+export default ProjectItem;

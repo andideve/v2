@@ -6,7 +6,7 @@ import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Project from '@/containers/organisms/project';
-import useShowMore from '@/hooks/use-show-more';
+import { ShowMoreContext } from '@/context/show-more';
 import useSearch from '@/hooks/use-search';
 import { UI } from '@/config/globals';
 import { Project as ProjectType } from '@/types/project';
@@ -30,10 +30,6 @@ export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => {
 
 export default function Work({ author, projects, tags }: PageProps) {
   const finder = useSearch(projects);
-  const { list, shouldRenderButton, onShowMore } = useShowMore(
-    finder.shouldRender ? finder.list : projects,
-    9,
-  );
   return (
     <Page author={author} title="My Work">
       <Page.Section minHeight={`calc(100vh - ${UI.navbarH})`}>
@@ -71,18 +67,24 @@ export default function Work({ author, projects, tags }: PageProps) {
             Couldn&apos;t find anything to match your criteria. Sorry.
           </Typography>
         )}
-        <Project.List>
-          {list.map((project, i) => (
-            <Project.Item key={i} {...project} />
-          ))}
-        </Project.List>
-        {shouldRenderButton && (
-          <Box as="footer" mt={UI.frameY} className="text-center">
-            <Button size="lg" variant="tinted" iconRight={<FiPlus />} onClick={onShowMore}>
-              Show more
-            </Button>
-          </Box>
-        )}
+        <ShowMoreContext items={finder.shouldRender ? finder.list : projects} limit={9}>
+          {({ list, shouldRenderButton, onShowMore }) => (
+            <>
+              <Project.List>
+                {list.map((project, i) => (
+                  <Project.Item key={i} {...(project as ProjectType)} />
+                ))}
+              </Project.List>
+              {shouldRenderButton && (
+                <Box as="footer" mt={UI.frameY} className="text-center">
+                  <Button size="lg" variant="tinted" iconRight={<FiPlus />} onClick={onShowMore}>
+                    Show more
+                  </Button>
+                </Box>
+              )}
+            </>
+          )}
+        </ShowMoreContext>
       </Page.Section>
     </Page>
   );

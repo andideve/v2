@@ -19,6 +19,7 @@
       "@/components/*": ["src/components/*"],
       "@/config/*": ["src/config/*"],
       "@/containers/*": ["src/containers/*"],
+      "@/context/*": ["src/context/*"],
       "@/hooks/*": ["src/hooks/*"],
       "@/services": ["src/services"],
       "@/services/*": ["src/services/*"],

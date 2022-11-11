@@ -1,23 +1,30 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Box, Typography } from '@andideve/design-system';
 import { Navbar as Nav } from '@andideve/ds-navbar';
+import { dequal } from 'dequal';
 
 import NavLink from '@/components/molecules/navbar/nav-link';
 import { IconButtons, IconButtonsProps } from '@/components/molecules/navbar/icon-buttons';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
 
-export default function Footer({
-  brand,
-  menuItems,
-  iconButtons = [],
-  copy,
-}: {
+interface FooterProps {
   brand: string;
   menuItems: Menu[];
   iconButtons?: IconButtonsProps['items'];
   copy?: React.ReactNode;
-}) {
+}
+
+function propsAreEqual(prev: FooterProps, next: FooterProps) {
+  return [
+    prev.brand === prev.brand,
+    dequal(prev.menuItems, prev.menuItems),
+    dequal(prev.iconButtons, prev.iconButtons),
+    prev.copy === prev.copy,
+  ].every(Boolean);
+}
+
+const Footer = memo<FooterProps>(function ({ brand, menuItems, iconButtons = [], copy }) {
   return (
     <Box
       as="footer"
@@ -59,4 +66,6 @@ export default function Footer({
       )}
     </Box>
   );
-}
+}, propsAreEqual);
+
+export default Footer;
