@@ -8,6 +8,7 @@ import { dequal } from 'dequal';
 import { NavLink, IconButtons, IconButtonsProps, MobileMenu } from '@/components/molecules/navbar';
 import WindowScrollDisabler from '@/components/molecules/window-scroll-disabler';
 import { DisclosureContext } from '@/context/disclosure';
+import useThemeHandler from '@/hooks/use-theme-handler';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
 
@@ -25,6 +26,22 @@ function propsAreEqual(prev: NavbarProps, next: NavbarProps) {
     dequal(prev.iconButtons, next.iconButtons),
     prev.cta === next.cta,
   ].every(Boolean);
+}
+
+function NavIconButtons({ items: _items }: IconButtonsProps) {
+  const themeHandler = useThemeHandler();
+  return (
+    <IconButtons
+      items={[
+        ..._items,
+        {
+          title: themeHandler.isReady ? 'Change Theme' : 'Loading...',
+          onClick: themeHandler.onChange,
+          children: themeHandler.icon,
+        },
+      ]}
+    />
+  );
 }
 
 const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [], cta }) {
@@ -56,7 +73,7 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [],
         </Nav.Links>
       </div>
       <div className="nav__end flex space-x-12">
-        <IconButtons items={iconButtons} />
+        <NavIconButtons items={iconButtons} />
         <DisclosureContext>
           {({ isOpen, onToggle }) => (
             <div className="block lg:hidden">
