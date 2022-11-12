@@ -6,6 +6,7 @@ import { Drawer } from '@andideve/ds-drawer';
 import { dequal } from 'dequal';
 
 import { NavLink, IconButtons, IconButtonsProps, MobileMenu } from '@/components/molecules/navbar';
+import WindowScrollDisabler from '@/components/molecules/window-scroll-disabler';
 import { DisclosureContext } from '@/context/disclosure';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
@@ -59,6 +60,7 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [],
         <DisclosureContext>
           {({ isOpen, onToggle }) => (
             <div className="block lg:hidden">
+              <WindowScrollDisabler disable={isOpen} />
               <Nav.Toggle
                 aria-controls="main-nav-drawer"
                 className="-mx-3"
