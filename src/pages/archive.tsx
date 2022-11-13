@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Box, Table, Typography } from '@andideve/design-system';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
@@ -22,7 +22,7 @@ export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
   },
 }));
 
-export default function Archive({ author, projects }: PageProps) {
+const Archive = memo<PageProps>(function ({ author, projects }) {
   return (
     <Page author={author} title="Archive">
       <Page.Section minHeight={`calc(100vh - ${UI.navbarH})`}>
@@ -69,4 +69,6 @@ export default function Archive({ author, projects }: PageProps) {
       </Page.Section>
     </Page>
   );
-}
+});
+
+export default Archive;

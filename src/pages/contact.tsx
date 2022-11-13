@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, memo } from 'react';
 import { Box, Input, Typography, Button, StyledInput } from '@andideve/design-system';
 import { useForm } from 'react-hook-form';
 
@@ -16,7 +16,7 @@ type PageProps = PageDataProps;
 
 export const getServerSideProps = mergeGSSP<PageProps>(gSSP);
 
-export default function Links({ author }: PageProps) {
+const Contact = memo<PageProps>(function ({ author }) {
   const [loading, setLoading] = useState(false);
 
   const form = useForm<Email>();
@@ -107,4 +107,6 @@ export default function Links({ author }: PageProps) {
       </Page.Section>
     </Page>
   );
-}
+});
+
+export default Contact;

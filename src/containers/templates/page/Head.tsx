@@ -1,6 +1,7 @@
 import NextHead from 'next/head';
+import React, { memo } from 'react';
 
-export default function Head({ title, description }: { title: string; description: string }) {
+const Head = memo<{ title: string; description: string }>(function ({ title, description }) {
   return (
     <NextHead>
       <title>{title}</title>
@@ -41,4 +42,6 @@ export default function Head({ title, description }: { title: string; descriptio
       />
     </NextHead>
   );
-}
+});
+
+export default Head;

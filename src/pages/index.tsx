@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { memo } from 'react';
 import { Box, Button, Typography } from '@andideve/design-system';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
@@ -26,7 +26,7 @@ export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
   },
 }));
 
-function Hero({ author }: { author: Author }) {
+const Hero = memo<{ author: Author }>(function ({ author }) {
   const greeting = `Hello, I'm ${author.name}.`;
   return (
     <Page.Section
@@ -51,9 +51,9 @@ function Hero({ author }: { author: Author }) {
       )}
     </Page.Section>
   );
-}
+});
 
-function LatestProjects({ items }: { items: ProjectType[] }) {
+const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
   return (
     <Page.Section>
       <header className="mb-12 text-center">
@@ -91,13 +91,15 @@ function LatestProjects({ items }: { items: ProjectType[] }) {
       </ShowLessContext>
     </Page.Section>
   );
-}
+});
 
-export default function Home({ author, projects }: PageProps) {
+const Home = memo<PageProps>(function ({ author, projects }) {
   return (
     <Page author={author} title={author.name} description={author.description}>
       <Hero author={author} />
       <LatestProjects items={projects} />
     </Page>
   );
-}
+});
+
+export default Home;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Box, Typography } from '@andideve/design-system';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
@@ -19,7 +19,7 @@ export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
   },
 }));
 
-export default function Links({ author, linktrees }: PageProps) {
+const Links = memo<PageProps>(function ({ author, linktrees }) {
   return (
     <Page author={author} title="Links">
       <Page.Section containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
@@ -39,4 +39,6 @@ export default function Links({ author, linktrees }: PageProps) {
       </Page.Section>
     </Page>
   );
-}
+});
+
+export default Links;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Box, Typography, Button } from '@andideve/design-system';
 import { FiPlus } from 'react-icons/fi';
 
@@ -28,7 +28,7 @@ export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => {
   };
 });
 
-export default function Work({ author, projects, tags }: PageProps) {
+const Work = memo<PageProps>(function ({ author, projects, tags }) {
   const finder = useSearch(projects);
   return (
     <Page author={author} title="My Work">
@@ -88,4 +88,6 @@ export default function Work({ author, projects, tags }: PageProps) {
       </Page.Section>
     </Page>
   );
-}
+});
+
+export default Work;
