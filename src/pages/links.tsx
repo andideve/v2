@@ -25,10 +25,10 @@ const Links = memo<PageProps>(function ({ author, linktrees }) {
       <Page.Section containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
         <Box as="header" mb={UI.frameY}>
           <Typography as="h2" size="6xl" className="font-bold">
-            Links
+            @{author.name}
           </Typography>
           <Typography as="p" size="xl" color="foreground.secondary" className="cursor-text mt-4">
-            A links to my profile on multiple platforms.
+            {author.description}
           </Typography>
         </Box>
         <Linktree.List>

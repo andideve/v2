@@ -38,7 +38,7 @@ function NavIconButtons({ items: _items }: IconButtonsProps) {
       items={[
         ..._items,
         {
-          title: themeHandler.isReady ? 'Change Theme' : 'Loading...',
+          title: themeHandler.isReady ? 'Switch Theme' : 'Loading...',
           onClick: themeHandler.onChange,
           children: themeHandler.icon,
         },

@@ -78,7 +78,7 @@ const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
               <Box as="footer" mt={UI.frameY} className="text-center">
                 <Button
                   size="lg"
-                  variant="tinted"
+                  variant="gray"
                   iconRight={isOpen ? <FiChevronUp /> : <FiChevronDown />}
                   onClick={onToggle}
                 >

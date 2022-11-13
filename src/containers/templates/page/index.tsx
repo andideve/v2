@@ -75,7 +75,7 @@ export const Page: React.FC<PageProps> & { Section: typeof Section } = ({
             children: FiGithub,
           },
           {
-            title: 'Twitter',
+            title: 'Twitter Profile',
             href: author.urls.twitter,
             external: true,
             children: FiTwitter,
@@ -91,7 +91,7 @@ export const Page: React.FC<PageProps> & { Section: typeof Section } = ({
       menuItems={extendedSiteMenu}
       iconButtons={[
         {
-          title: 'GitHub Repository',
+          title: 'View Source Code',
           href: EXT_LINKS.ghRepository,
           external: true,
           children: FiBox,
