@@ -53,13 +53,21 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [],
       height={UI.navbarH}
       borderColor="separator.transparent"
       zIndex={9999}
-      className="fixed inset-x-0 justify-between border-b border-solid backdrop-blur-xl"
+      className="fixed inset-x-0 justify-between border-b border-solid backdrop-blur-3xl"
     >
-      <Box
-        backgroundColor="background.elevated.primary"
-        zIndex={-1}
-        className="absolute inset-0 opacity-70"
-      />
+      <div className="overflow-hidden absolute inset-0">
+        <Box
+          backgroundColor="background.elevated.primary"
+          zIndex={-1}
+          className="relative opacity-90 w-full h-full"
+        />
+        <Box
+          backgroundColor="accent"
+          zIndex={-1}
+          className="relative -top-full opacity-5 w-full h-full blur-3xl"
+        />
+      </div>
+
       <Nav.Brand className="nav__start relative z-10">
         <Link href="/" passHref>
           <a className="after:absolute after:inset-0">{brand}</a>
