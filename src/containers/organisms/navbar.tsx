@@ -7,6 +7,7 @@ import { dequal } from 'dequal';
 import clsx from 'clsx';
 
 import { IconButtons, IconButtonsProps, MobileMenu } from '@/components/molecules/navbar';
+import VerticalRule from '@/components/atoms/vertical-rule';
 import WindowScrollDisabler from '@/components/molecules/window-scroll-disabler';
 import { DisclosureContext } from '@/context/disclosure';
 import { NavLinkContext } from '@/context/nav-link';
@@ -37,7 +38,7 @@ function NavIconButtons({ items: _items }: IconButtonsProps) {
       items={[
         ..._items,
         {
-          title: themeHandler.isReady ? 'Change Theme' : 'Loading...',
+          title: themeHandler.isReady ? 'Switch Theme' : 'Loading...',
           onClick: themeHandler.onChange,
           children: themeHandler.icon,
         },
@@ -53,13 +54,21 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [],
       height={UI.navbarH}
       borderColor="separator.transparent"
       zIndex={9999}
-      className="fixed inset-x-0 justify-between border-b border-solid backdrop-blur-xl"
+      className="fixed inset-x-0 justify-between border-b border-solid backdrop-blur-3xl"
     >
-      <Box
-        backgroundColor="background.elevated.primary"
-        zIndex={-1}
-        className="absolute inset-0 opacity-70"
-      />
+      <div className="overflow-hidden absolute inset-0">
+        <Box
+          backgroundColor="background.elevated.primary"
+          zIndex={-1}
+          className="relative opacity-90 w-full h-full"
+        />
+        <Box
+          backgroundColor="accent"
+          zIndex={-1}
+          className="relative -top-full opacity-5 w-full h-full blur-3xl"
+        />
+      </div>
+
       <Nav.Brand className="nav__start relative z-10">
         <Link href="/" passHref>
           <a className="after:absolute after:inset-0">{brand}</a>
@@ -86,8 +95,9 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [],
           ))}
         </Nav.Links>
       </div>
-      <div className="nav__end flex space-x-12">
+      <div className="nav__end flex space-x-8 lg:space-x-6">
         <NavIconButtons items={iconButtons} />
+        <VerticalRule className="my-auto h-7" />
         <DisclosureContext>
           {({ isOpen, onToggle }) => (
             <div className="block lg:hidden">
