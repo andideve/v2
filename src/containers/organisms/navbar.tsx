@@ -7,6 +7,7 @@ import { dequal } from 'dequal';
 import clsx from 'clsx';
 
 import { IconButtons, IconButtonsProps, MobileMenu } from '@/components/molecules/navbar';
+import VerticalRule from '@/components/atoms/vertical-rule';
 import WindowScrollDisabler from '@/components/molecules/window-scroll-disabler';
 import { DisclosureContext } from '@/context/disclosure';
 import { NavLinkContext } from '@/context/nav-link';
@@ -94,8 +95,9 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [],
           ))}
         </Nav.Links>
       </div>
-      <div className="nav__end flex space-x-12">
+      <div className="nav__end flex space-x-8 lg:space-x-6">
         <NavIconButtons items={iconButtons} />
+        <VerticalRule className="my-auto h-7" />
         <DisclosureContext>
           {({ isOpen, onToggle }) => (
             <div className="block lg:hidden">
