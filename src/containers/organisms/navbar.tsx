@@ -4,10 +4,12 @@ import { Box } from '@andideve/design-system';
 import { Navbar as Nav } from '@andideve/ds-navbar';
 import { Drawer } from '@andideve/ds-drawer';
 import { dequal } from 'dequal';
+import clsx from 'clsx';
 
-import { NavLink, IconButtons, IconButtonsProps, MobileMenu } from '@/components/molecules/navbar';
+import { IconButtons, IconButtonsProps, MobileMenu } from '@/components/molecules/navbar';
 import WindowScrollDisabler from '@/components/molecules/window-scroll-disabler';
 import { DisclosureContext } from '@/context/disclosure';
+import { NavLinkContext } from '@/context/nav-link';
 import useThemeHandler from '@/hooks/use-theme-handler';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
@@ -64,11 +66,23 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [],
         </Link>
       </Nav.Brand>
       <div className="nav__center grow lg:absolute lg:inset-0 hidden lg:flex lg:items-center lg:justify-center">
-        <Nav.Links>
+        <Nav.Links as="ul">
           {menuItems.map((menu, i) => (
-            <NavLink key={i} to={menu.to} exact={menu.exact}>
-              {menu.label}
-            </NavLink>
+            <li key={i}>
+              <NavLinkContext to={menu.to} exact={menu.exact}>
+                {({ active }) => (
+                  <Link href={menu.to} passHref>
+                    <Nav.Link
+                      aria-current={active ? 'page' : undefined}
+                      color={active ? 'foreground.primary' : 'foreground.secondary'}
+                      className={clsx('nav-link', { active })}
+                    >
+                      {menu.label}
+                    </Nav.Link>
+                  </Link>
+                )}
+              </NavLinkContext>
+            </li>
           ))}
         </Nav.Links>
       </div>

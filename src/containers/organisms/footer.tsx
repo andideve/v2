@@ -1,10 +1,12 @@
+import Link from 'next/link';
 import React, { memo } from 'react';
 import { Box, Typography } from '@andideve/design-system';
 import { Navbar as Nav } from '@andideve/ds-navbar';
 import { dequal } from 'dequal';
+import clsx from 'clsx';
 
-import NavLink from '@/components/molecules/navbar/nav-link';
 import { IconButtons, IconButtonsProps } from '@/components/molecules/navbar/icon-buttons';
+import { NavLinkContext } from '@/context/nav-link';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
 
@@ -38,14 +40,27 @@ const Footer = memo<FooterProps>(function ({ brand, menuItems, iconButtons = [],
         <Nav.Brand className="brand-and-links__start">{brand}</Nav.Brand>
         <div className="brand-and-links__center footer__row--brand-and-links lg:grow lg:flex lg:justify-center mt-6 lg:mt-0 lg:mx-12">
           <Nav.Links
+            as="ul"
             spacing={0}
             display={{ _: 'grid', lg: 'flex' }}
             className="grid-cols-2 gap-y-4 gap-x-6 lg:gap-0 lg:space-x-6"
           >
             {menuItems.map((menu, i) => (
-              <NavLink key={i} to={menu.to} exact={menu.exact} className="-mx-1 lg:mx-0">
-                {menu.label}
-              </NavLink>
+              <li key={i}>
+                <NavLinkContext to={menu.to} exact={menu.exact}>
+                  {({ active }) => (
+                    <Link href={menu.to} passHref>
+                      <Nav.Link
+                        aria-current={active ? 'page' : undefined}
+                        color={active ? 'foreground.primary' : 'foreground.secondary'}
+                        className={clsx('nav-link', { active }, 'block lg:inline -mx-1 lg:mx-0')}
+                      >
+                        {menu.label}
+                      </Nav.Link>
+                    </Link>
+                  )}
+                </NavLinkContext>
+              </li>
             ))}
           </Nav.Links>
         </div>

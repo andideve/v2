@@ -20,7 +20,7 @@
   "dependencies": {
     "@andideve/design-system": "^0.1.0",
     "@andideve/ds-drawer": "^0.1.1",
-    "@andideve/ds-navbar": "^0.1.0",
+    "@andideve/ds-navbar": "^0.2.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "axios": "^1.0.0",
