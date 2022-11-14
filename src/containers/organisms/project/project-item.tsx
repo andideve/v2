@@ -1,10 +1,11 @@
 import React, { useMemo, memo } from 'react';
-import { Box, Typography } from '@andideve/design-system';
+import { Box } from '@andideve/design-system';
 import { FiHexagon, FiFolder, FiFile } from 'react-icons/fi';
 import { dequal } from 'dequal';
 
 import Tags from '@/components/molecules/tags';
 import Links from '@/components/molecules/links';
+import Typography from '@/components/atoms/typography';
 import { Project } from '@/types/project';
 
 function getSVG({ archived, github, external }: Pick<Project, 'archived' | 'github' | 'external'>) {
@@ -50,11 +51,16 @@ const ProjectItem = memo(function ({
           <time dateTime={date} className="sr-only">
             {date}
           </time>
-          <Typography as="h3" size="xl" className="font-semibold">
+          <Typography as="h3" variant="title-3">
             {title}
           </Typography>
         </header>
-        <Typography as="p" color="foreground.secondary" className="cursor-text mt-4">
+        <Typography
+          as="p"
+          variant="label-3"
+          color="foreground.secondary"
+          className="cursor-text mt-4"
+        >
           {description}
         </Typography>
       </div>

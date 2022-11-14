@@ -1,12 +1,11 @@
 import Link from 'next/link';
 import React, { memo } from 'react';
-import { Box, Typography } from '@andideve/design-system';
+import { Box } from '@andideve/design-system';
 import { Navbar as Nav } from '@andideve/ds-navbar';
 import { dequal } from 'dequal';
-import clsx from 'clsx';
 
 import { IconButtons, IconButtonsProps } from '@/components/molecules/navbar/icon-buttons';
-import { NavLinkContext } from '@/context/nav-link';
+import Typography from '@/components/atoms/typography';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
 
@@ -47,19 +46,14 @@ const Footer = memo<FooterProps>(function ({ brand, menuItems, iconButtons = [],
           >
             {menuItems.map((menu, i) => (
               <li key={i}>
-                <NavLinkContext to={menu.to} exact={menu.exact}>
-                  {({ active }) => (
-                    <Link href={menu.to} passHref>
-                      <Nav.Link
-                        aria-current={active ? 'page' : undefined}
-                        color={active ? 'foreground.primary' : 'foreground.secondary'}
-                        className={clsx('nav-link', { active }, 'block lg:inline -mx-1 lg:mx-0')}
-                      >
-                        {menu.label}
-                      </Nav.Link>
-                    </Link>
-                  )}
-                </NavLinkContext>
+                <Link href={menu.to} passHref>
+                  <Nav.Link
+                    color="foreground.secondary"
+                    className="nav-link block lg:inline -mx-1 lg:mx-0"
+                  >
+                    {menu.label}
+                  </Nav.Link>
+                </Link>
               </li>
             ))}
           </Nav.Links>
@@ -72,9 +66,10 @@ const Footer = memo<FooterProps>(function ({ brand, menuItems, iconButtons = [],
       </div>
       {copy && (
         <Typography
-          size="xs"
+          variant="label-5"
+          fontWeight="semibold"
           color="foreground.secondary"
-          className="footer__row mt-6 font-semibold"
+          className="footer__row mt-6"
         >
           {copy}
         </Typography>

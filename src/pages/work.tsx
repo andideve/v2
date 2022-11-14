@@ -1,11 +1,13 @@
 import React, { memo } from 'react';
-import { Box, Typography, Button } from '@andideve/design-system';
+import { Box, Button } from '@andideve/design-system';
 import { FiPlus } from 'react-icons/fi';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
+import Section from '@/containers/templates/section';
 import Project from '@/containers/organisms/project';
+import Typography from '@/components/atoms/typography';
 import { ShowMoreContext } from '@/context/show-more';
 import useSearch from '@/hooks/use-search';
 import { UI } from '@/config/globals';
@@ -32,9 +34,9 @@ const Work = memo<PageProps>(function ({ author, projects, tags }) {
   const finder = useSearch(projects);
   return (
     <Page author={author} title="My Work">
-      <Page.Section minHeight={`calc(100vh - ${UI.navbarH})`}>
-        <Box as="header" mb={UI.frameY}>
-          <Typography as="h2" size="6xl" className="font-bold">
+      <Section spacing="1" minHeight={`calc(100vh - ${UI.navbarH})`}>
+        <Section.Header>
+          <Typography as="h2" variant="title-1">
             My Work
           </Typography>
           <Typography as="p" color="foreground.secondary" className="mt-8 mb-4">
@@ -61,9 +63,9 @@ const Work = memo<PageProps>(function ({ author, projects, tags }) {
               </Button>
             ))}
           </form>
-        </Box>
+        </Section.Header>
         {finder.notFound && (
-          <Typography as="p" size="2xl" color="foreground.secondary">
+          <Typography as="p" variant="label-1" color="foreground.secondary">
             Couldn&apos;t find anything to match your criteria. Sorry.
           </Typography>
         )}
@@ -76,16 +78,16 @@ const Work = memo<PageProps>(function ({ author, projects, tags }) {
                 ))}
               </Project.List>
               {shouldRenderButton && (
-                <Box as="footer" mt={UI.frameY} className="text-center">
+                <Section.Footer className="text-center">
                   <Button size="lg" variant="tinted" iconRight={<FiPlus />} onClick={onShowMore}>
                     Show more
                   </Button>
-                </Box>
+                </Section.Footer>
               )}
             </>
           )}
         </ShowMoreContext>
-      </Page.Section>
+      </Section>
     </Page>
   );
 });

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/react';
-import { Typography, TypographyProps } from '@andideve/design-system';
 
+import { Typography, TypographyProps } from '@/components/atoms/typography';
 import useTyping from '@/hooks/use-typing';
 
 const blinkKeyframes = keyframes({

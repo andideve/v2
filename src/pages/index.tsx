@@ -1,13 +1,15 @@
 import Link from 'next/link';
 import React, { memo } from 'react';
-import { Box, Button, Typography } from '@andideve/design-system';
+import { Button } from '@andideve/design-system';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
+import Section from '@/containers/templates/section';
 import Project from '@/containers/organisms/project';
 import Typing from '@/components/molecules/typing';
+import Typography from '@/components/atoms/typography';
 import { ShowLessContext } from '@/context/show-less';
 import { SITE_PATHS, UI } from '@/config/globals';
 import { Author } from '@/types/defaults';
@@ -29,35 +31,40 @@ export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
 const Hero = memo<{ author: Author }>(function ({ author }) {
   const greeting = `Hello, I'm ${author.name}.`;
   return (
-    <Page.Section
+    <Section
       containerW={590}
       minHeight={`calc(100vh - ${UI.navbarH})`}
       className="flex flex-col justify-center text-center"
     >
       <header>
         <h2>
-          <Typing as="div" color="accent" className="mb-4 font-normal">
+          <Typing as="div" color="accent" className="mb-4">
             {greeting}
           </Typing>
-          <Typography as="div" size="6xl" className="font-bold">
+          <Typography as="div" variant="title-1">
             {author.description}
           </Typography>
         </h2>
       </header>
       {author.intro && (
-        <Typography as="p" size="xl" color="foreground.secondary" className="cursor-text mt-4">
+        <Typography
+          as="p"
+          variant="label-1"
+          color="foreground.secondary"
+          className="cursor-text mt-4"
+        >
           {author.intro}
         </Typography>
       )}
-    </Page.Section>
+    </Section>
   );
 });
 
 const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
   return (
-    <Page.Section>
-      <header className="mb-12 text-center">
-        <Typography as="h2" size="4xl" className="font-semibold">
+    <Section spacing="2" centered>
+      <Section.Header>
+        <Typography as="h2" variant="title-2">
           Latest my work
         </Typography>
         <Link href={SITE_PATHS.work} passHref>
@@ -65,7 +72,7 @@ const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
             view all projects
           </Typography>
         </Link>
-      </header>
+      </Section.Header>
       <ShowLessContext items={items} limit={3}>
         {({ list, shouldRenderButton, isOpen, onToggle }) => (
           <>
@@ -75,7 +82,7 @@ const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
               ))}
             </Project.List>
             {shouldRenderButton && (
-              <Box as="footer" mt={UI.frameY} className="text-center">
+              <Section.Footer>
                 <Button
                   size="lg"
                   variant="gray"
@@ -84,12 +91,12 @@ const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
                 >
                   {isOpen ? 'Show less' : 'Show more'}
                 </Button>
-              </Box>
+              </Section.Footer>
             )}
           </>
         )}
       </ShowLessContext>
-    </Page.Section>
+    </Section>
   );
 });
 

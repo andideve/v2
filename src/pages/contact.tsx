@@ -1,11 +1,13 @@
 import React, { useCallback, useState, memo } from 'react';
-import { Box, Input, Typography, Button, StyledInput } from '@andideve/design-system';
+import { Box, Input, Button, StyledInput } from '@andideve/design-system';
 import { useForm } from 'react-hook-form';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
+import Section from '@/containers/templates/section';
 import Form from '@/components/molecules/form';
+import Typography from '@/components/atoms/typography';
 import { UI } from '@/config/globals';
 import { Email } from '@/types/email';
 import Services from '@/services';
@@ -77,20 +79,25 @@ const Contact = memo<PageProps>(function ({ author }) {
 
   return (
     <Page author={author} title="Contact">
-      <Page.Section containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
-        <Box as="header" mb={UI.frameY}>
-          <Typography as="h2" size="6xl" className="font-bold">
+      <Section spacing="1" containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
+        <Section.Header>
+          <Typography as="h2" variant="title-1">
             Hey! Wanna collaborate?
           </Typography>
-        </Box>
+        </Section.Header>
         <Form onSubmit={form.handleSubmit(pushData)} onReset={onReset}>
           <Form.Group>{inputs.name}</Form.Group>
           <Form.Group>{inputs.from}</Form.Group>
           <Box mt={UI.frameY} className="mb-12">
-            <Typography as="h3" size="4xl" className="font-semibold">
+            <Typography as="h3" variant="title-2">
               Share your idea with me
             </Typography>
-            <Typography as="p" size="lg" color="foreground.secondary" className="cursor-text mt-4">
+            <Typography
+              as="p"
+              variant="label-2"
+              color="foreground.secondary"
+              className="cursor-text mt-4"
+            >
               Shoot me a direct email and I will get in touch with you as soon as possible.
             </Typography>
           </Box>
@@ -104,7 +111,7 @@ const Contact = memo<PageProps>(function ({ author }) {
             </Button>
           </Form.Footer>
         </Form>
-      </Page.Section>
+      </Section>
     </Page>
   );
 });

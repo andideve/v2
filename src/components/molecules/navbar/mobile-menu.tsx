@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import React, { useMemo } from 'react';
-import { Box, Typography } from '@andideve/design-system';
+import { Box } from '@andideve/design-system';
 import clsx from 'clsx';
 
+import Typography from '@/components/atoms/typography';
 import useNavlink from '@/hooks/use-navlink';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
