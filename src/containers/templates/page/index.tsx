@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import type { GetServerSideProps } from 'next';
 import React from 'react';
-import { Box, BoxProps, Theme } from '@andideve/design-system';
+import { Box } from '@andideve/design-system';
 import { Button } from '@andideve/design-system';
 import { FiArrowRight, FiBox, FiGithub, FiTwitter } from 'react-icons/fi';
 
 import Head from './Head';
+import Section from '../section';
 import Navbar from '@/containers/organisms/navbar';
 import Footer from '@/containers/organisms/footer';
 import { SITE_PATHS, UI, EXT_LINKS } from '@/config/globals';
@@ -20,25 +21,6 @@ const cta = (
     </Button>
   </Link>
 );
-
-function Section({
-  children,
-  containerW: _containerW = 'xl',
-  ...rest
-}: {
-  containerW?: keyof Theme['screens'] | number;
-} & BoxProps) {
-  return (
-    <Box as="section" py={UI.frameY} px={UI.frameX} {...rest}>
-      <Box
-        width={typeof _containerW === 'number' ? _containerW : `var(--ds-screens-${_containerW})`}
-        className="mx-auto max-w-full"
-      >
-        {children}
-      </Box>
-    </Box>
-  );
-}
 
 export interface PageDataProps {
   author: Author;
