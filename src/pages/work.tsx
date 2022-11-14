@@ -1,11 +1,12 @@
 import React, { memo } from 'react';
-import { Box, Typography, Button } from '@andideve/design-system';
+import { Box, Button } from '@andideve/design-system';
 import { FiPlus } from 'react-icons/fi';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Project from '@/containers/organisms/project';
+import Typography from '@/components/atoms/typography';
 import { ShowMoreContext } from '@/context/show-more';
 import useSearch from '@/hooks/use-search';
 import { UI } from '@/config/globals';
@@ -34,7 +35,7 @@ const Work = memo<PageProps>(function ({ author, projects, tags }) {
     <Page author={author} title="My Work">
       <Page.Section minHeight={`calc(100vh - ${UI.navbarH})`}>
         <Box as="header" mb={UI.frameY}>
-          <Typography as="h2" size="6xl" className="font-bold">
+          <Typography as="h2" variant="title-1">
             My Work
           </Typography>
           <Typography as="p" color="foreground.secondary" className="mt-8 mb-4">
@@ -63,7 +64,7 @@ const Work = memo<PageProps>(function ({ author, projects, tags }) {
           </form>
         </Box>
         {finder.notFound && (
-          <Typography as="p" size="2xl" color="foreground.secondary">
+          <Typography as="p" variant="label-1" color="foreground.secondary">
             Couldn&apos;t find anything to match your criteria. Sorry.
           </Typography>
         )}

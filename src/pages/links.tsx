@@ -1,10 +1,11 @@
 import React, { memo } from 'react';
-import { Box, Typography } from '@andideve/design-system';
+import { Box } from '@andideve/design-system';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Linktree from '@/containers/organisms/linktree';
+import Typography from '@/components/atoms/typography';
 import { UI } from '@/config/globals';
 import { Linktree as LinktreeType } from '@/types/linktree';
 import Services from '@/services';
@@ -24,10 +25,15 @@ const Links = memo<PageProps>(function ({ author, linktrees }) {
     <Page author={author} title="Links">
       <Page.Section containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
         <Box as="header" mb={UI.frameY}>
-          <Typography as="h2" size="6xl" className="font-bold">
+          <Typography as="h2" variant="title-1">
             @{author.name}
           </Typography>
-          <Typography as="p" size="xl" color="foreground.secondary" className="cursor-text mt-4">
+          <Typography
+            as="p"
+            variant="label-1"
+            color="foreground.secondary"
+            className="cursor-text mt-4"
+          >
             {author.description}
           </Typography>
         </Box>
