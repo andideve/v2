@@ -3,26 +3,17 @@ import React, { useMemo } from 'react';
 import { Box } from '@andideve/design-system';
 import clsx from 'clsx';
 
+import { List, ListItem } from '@/components/atoms/list';
 import Typography from '@/components/atoms/typography';
 import useNavlink from '@/hooks/use-navlink';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
 
-function List({ children }: { children?: React.ReactNode }) {
-  return <ul className="list-none">{children}</ul>;
-}
-
 function Item({ label, to, exact }: Menu) {
   const { isActive } = useNavlink();
   const active = useMemo(() => isActive(to, exact), [to, exact]);
   return (
-    <Box
-      as="li"
-      px={UI.frameX}
-      height={UI.navbarH}
-      borderColor="separator.default"
-      className="relative flex items-center border-b border-solid"
-    >
+    <ListItem px={UI.frameX} height={UI.navbarH} className="relative">
       <Link href={to} passHref>
         <Typography
           as="a"
@@ -35,7 +26,7 @@ function Item({ label, to, exact }: Menu) {
           {label}
         </Typography>
       </Link>
-    </Box>
+    </ListItem>
   );
 }
 
@@ -46,7 +37,7 @@ export function MobileMenu({ children, items }: { items: Menu[]; children?: Reac
       backgroundColor="background.elevated.primary"
       className="overflow-y-auto"
     >
-      <List>
+      <List className="border-t-0 border-x-0">
         {items.map((menu) => (
           <Item key={menu.to} {...menu} />
         ))}
