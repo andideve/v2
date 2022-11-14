@@ -6,7 +6,7 @@ import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Section from '@/containers/templates/section';
-import Form from '@/components/molecules/form';
+import Form from '@/containers/templates/form';
 import Typography from '@/components/atoms/typography';
 import { UI } from '@/config/globals';
 import { Email } from '@/types/email';
