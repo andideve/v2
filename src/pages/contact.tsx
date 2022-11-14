@@ -1,11 +1,12 @@
 import React, { useCallback, useState, memo } from 'react';
-import { Box, Input, Typography, Button, StyledInput } from '@andideve/design-system';
+import { Box, Input, Button, StyledInput } from '@andideve/design-system';
 import { useForm } from 'react-hook-form';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Form from '@/components/molecules/form';
+import Typography from '@/components/atoms/typography';
 import { UI } from '@/config/globals';
 import { Email } from '@/types/email';
 import Services from '@/services';
@@ -79,7 +80,7 @@ const Contact = memo<PageProps>(function ({ author }) {
     <Page author={author} title="Contact">
       <Page.Section containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
         <Box as="header" mb={UI.frameY}>
-          <Typography as="h2" size="6xl" className="font-bold">
+          <Typography as="h2" variant="title-1">
             Hey! Wanna collaborate?
           </Typography>
         </Box>
@@ -87,10 +88,15 @@ const Contact = memo<PageProps>(function ({ author }) {
           <Form.Group>{inputs.name}</Form.Group>
           <Form.Group>{inputs.from}</Form.Group>
           <Box mt={UI.frameY} className="mb-12">
-            <Typography as="h3" size="4xl" className="font-semibold">
+            <Typography as="h3" variant="title-2">
               Share your idea with me
             </Typography>
-            <Typography as="p" size="lg" color="foreground.secondary" className="cursor-text mt-4">
+            <Typography
+              as="p"
+              variant="label-2"
+              color="foreground.secondary"
+              className="cursor-text mt-4"
+            >
               Shoot me a direct email and I will get in touch with you as soon as possible.
             </Typography>
           </Box>

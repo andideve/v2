@@ -1,9 +1,10 @@
 import React, { useMemo, memo } from 'react';
-import { Typography, StyledBox } from '@andideve/design-system';
+import { StyledBox } from '@andideve/design-system';
 import { FiLinkedin, FiTwitter, FiGithub, FiDribbble, FiExternalLink } from 'react-icons/fi';
 import { FaDiscord, FaSpotify } from 'react-icons/fa';
 import type { IconType } from 'react-icons';
 
+import Typography from '@/components/atoms/typography';
 import { Linktree } from '@/types/linktree';
 
 const Anchor = StyledBox.withComponent('a');
@@ -44,7 +45,7 @@ const Link = memo<LinkProps>(function ({ label, href }) {
     >
       <div className="flex items-center">
         {SVG && <SVG className="mr-2 w-5 h-5" style={{ color }} />}
-        <Typography as="span" className="font-semibold">
+        <Typography as="span" variant="title-5">
           {label}
         </Typography>
       </div>
@@ -73,10 +74,11 @@ export default function LinktreeItem({ category, items }: Linktree) {
     <li>
       <Typography
         as="h3"
-        size="xs"
+        variant="label-5"
+        fontWeight="medium"
         color="foreground.secondary"
         letterSpacing="0.08em"
-        className="uppercase mb-[.875rem] font-medium"
+        className="uppercase mb-[.875rem]"
       >
         {category}
       </Typography>

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { memo } from 'react';
-import { Box, Button, Typography } from '@andideve/design-system';
+import { Box, Button } from '@andideve/design-system';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
@@ -8,6 +8,7 @@ import mergeGSSP from '@/utils/server/merge-gssp';
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Project from '@/containers/organisms/project';
 import Typing from '@/components/molecules/typing';
+import Typography from '@/components/atoms/typography';
 import { ShowLessContext } from '@/context/show-less';
 import { SITE_PATHS, UI } from '@/config/globals';
 import { Author } from '@/types/defaults';
@@ -36,16 +37,21 @@ const Hero = memo<{ author: Author }>(function ({ author }) {
     >
       <header>
         <h2>
-          <Typing as="div" color="accent" className="mb-4 font-normal">
+          <Typing as="div" color="accent" className="mb-4">
             {greeting}
           </Typing>
-          <Typography as="div" size="6xl" className="font-bold">
+          <Typography as="div" variant="title-1">
             {author.description}
           </Typography>
         </h2>
       </header>
       {author.intro && (
-        <Typography as="p" size="xl" color="foreground.secondary" className="cursor-text mt-4">
+        <Typography
+          as="p"
+          variant="label-1"
+          color="foreground.secondary"
+          className="cursor-text mt-4"
+        >
           {author.intro}
         </Typography>
       )}
@@ -57,7 +63,7 @@ const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
   return (
     <Page.Section>
       <header className="mb-12 text-center">
-        <Typography as="h2" size="4xl" className="font-semibold">
+        <Typography as="h2" variant="title-2">
           Latest my work
         </Typography>
         <Link href={SITE_PATHS.work} passHref>
