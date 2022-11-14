@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
+import Section from '@/containers/templates/section';
 import Form from '@/components/molecules/form';
 import Typography from '@/components/atoms/typography';
 import { UI } from '@/config/globals';
@@ -78,12 +79,12 @@ const Contact = memo<PageProps>(function ({ author }) {
 
   return (
     <Page author={author} title="Contact">
-      <Page.Section containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
-        <Box as="header" mb={UI.frameY}>
+      <Section spacing="1" containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
+        <Section.Header>
           <Typography as="h2" variant="title-1">
             Hey! Wanna collaborate?
           </Typography>
-        </Box>
+        </Section.Header>
         <Form onSubmit={form.handleSubmit(pushData)} onReset={onReset}>
           <Form.Group>{inputs.name}</Form.Group>
           <Form.Group>{inputs.from}</Form.Group>
@@ -110,7 +111,7 @@ const Contact = memo<PageProps>(function ({ author }) {
             </Button>
           </Form.Footer>
         </Form>
-      </Page.Section>
+      </Section>
     </Page>
   );
 });

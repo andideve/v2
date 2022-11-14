@@ -6,7 +6,6 @@ import { Button } from '@andideve/design-system';
 import { FiArrowRight, FiBox, FiGithub, FiTwitter } from 'react-icons/fi';
 
 import Head from './Head';
-import Section from '../section';
 import Navbar from '@/containers/organisms/navbar';
 import Footer from '@/containers/organisms/footer';
 import { SITE_PATHS, UI, EXT_LINKS } from '@/config/globals';
@@ -36,7 +35,7 @@ export const gSSP: GetServerSideProps<PageDataProps> = async () => ({
   },
 });
 
-export const Page: React.FC<PageProps> & { Section: typeof Section } = ({
+export const Page: React.FC<PageProps> = ({
   children,
   author,
   title,
@@ -83,7 +82,5 @@ export const Page: React.FC<PageProps> & { Section: typeof Section } = ({
     />
   </>
 );
-
-Page.Section = Section;
 
 export default Page;
