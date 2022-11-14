@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import React, { memo } from 'react';
-import { Box, Button } from '@andideve/design-system';
+import { Button } from '@andideve/design-system';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
+import Section from '@/containers/templates/section';
 import Project from '@/containers/organisms/project';
 import Typing from '@/components/molecules/typing';
 import Typography from '@/components/atoms/typography';
@@ -30,7 +31,7 @@ export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
 const Hero = memo<{ author: Author }>(function ({ author }) {
   const greeting = `Hello, I'm ${author.name}.`;
   return (
-    <Page.Section
+    <Section
       containerW={590}
       minHeight={`calc(100vh - ${UI.navbarH})`}
       className="flex flex-col justify-center text-center"
@@ -55,14 +56,14 @@ const Hero = memo<{ author: Author }>(function ({ author }) {
           {author.intro}
         </Typography>
       )}
-    </Page.Section>
+    </Section>
   );
 });
 
 const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
   return (
-    <Page.Section>
-      <header className="mb-12 text-center">
+    <Section spacing="2" centered>
+      <Section.Header>
         <Typography as="h2" variant="title-2">
           Latest my work
         </Typography>
@@ -71,7 +72,7 @@ const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
             view all projects
           </Typography>
         </Link>
-      </header>
+      </Section.Header>
       <ShowLessContext items={items} limit={3}>
         {({ list, shouldRenderButton, isOpen, onToggle }) => (
           <>
@@ -81,7 +82,7 @@ const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
               ))}
             </Project.List>
             {shouldRenderButton && (
-              <Box as="footer" mt={UI.frameY} className="text-center">
+              <Section.Footer>
                 <Button
                   size="lg"
                   variant="gray"
@@ -90,12 +91,12 @@ const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
                 >
                   {isOpen ? 'Show less' : 'Show more'}
                 </Button>
-              </Box>
+              </Section.Footer>
             )}
           </>
         )}
       </ShowLessContext>
-    </Page.Section>
+    </Section>
   );
 });
 

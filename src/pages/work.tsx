@@ -5,6 +5,7 @@ import { FiPlus } from 'react-icons/fi';
 import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
+import Section from '@/containers/templates/section';
 import Project from '@/containers/organisms/project';
 import Typography from '@/components/atoms/typography';
 import { ShowMoreContext } from '@/context/show-more';
@@ -33,8 +34,8 @@ const Work = memo<PageProps>(function ({ author, projects, tags }) {
   const finder = useSearch(projects);
   return (
     <Page author={author} title="My Work">
-      <Page.Section minHeight={`calc(100vh - ${UI.navbarH})`}>
-        <Box as="header" mb={UI.frameY}>
+      <Section spacing="1" minHeight={`calc(100vh - ${UI.navbarH})`}>
+        <Section.Header>
           <Typography as="h2" variant="title-1">
             My Work
           </Typography>
@@ -62,7 +63,7 @@ const Work = memo<PageProps>(function ({ author, projects, tags }) {
               </Button>
             ))}
           </form>
-        </Box>
+        </Section.Header>
         {finder.notFound && (
           <Typography as="p" variant="label-1" color="foreground.secondary">
             Couldn&apos;t find anything to match your criteria. Sorry.
@@ -77,16 +78,16 @@ const Work = memo<PageProps>(function ({ author, projects, tags }) {
                 ))}
               </Project.List>
               {shouldRenderButton && (
-                <Box as="footer" mt={UI.frameY} className="text-center">
+                <Section.Footer className="text-center">
                   <Button size="lg" variant="tinted" iconRight={<FiPlus />} onClick={onShowMore}>
                     Show more
                   </Button>
-                </Box>
+                </Section.Footer>
               )}
             </>
           )}
         </ShowMoreContext>
-      </Page.Section>
+      </Section>
     </Page>
   );
 });
