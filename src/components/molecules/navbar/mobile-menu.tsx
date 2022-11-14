@@ -25,10 +25,8 @@ export function MobileMenu({ children, items }: { items: Menu[]; children?: Reac
                   <Typography
                     as="a"
                     aria-current={active ? 'page' : undefined}
-                    className={clsx(
-                      'nav-link font-semibold after:absolute after:inset-0',
-                      active && 'active',
-                    )}
+                    fontWeight="semibold"
+                    className={clsx('nav-link after:absolute after:inset-0', active && 'active')}
                   >
                     {menu.label}
                   </Typography>
