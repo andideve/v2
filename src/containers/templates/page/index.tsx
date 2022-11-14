@@ -5,7 +5,7 @@ import { Box } from '@andideve/design-system';
 import { Button } from '@andideve/design-system';
 import { FiArrowRight, FiBox, FiGithub, FiTwitter } from 'react-icons/fi';
 
-import Head from './Head';
+import Head from './head';
 import Navbar from '@/containers/organisms/navbar';
 import Footer from '@/containers/organisms/footer';
 import { SITE_PATHS, UI, EXT_LINKS } from '@/config/globals';
