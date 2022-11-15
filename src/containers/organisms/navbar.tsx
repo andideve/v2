@@ -5,6 +5,7 @@ import { Navbar as Nav } from '@andideve/ds-navbar';
 import { Drawer } from '@andideve/ds-drawer';
 import { dequal } from 'dequal';
 import clsx from 'clsx';
+import type { IconType } from 'react-icons';
 
 import { QuickAction, QuickActionItemProps, MobileMenu } from '@/components/molecules/navbar';
 import VerticalRule from '@/components/atoms/vertical-rule';
@@ -15,11 +16,12 @@ import useThemeHandler from '@/hooks/use-theme-handler';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
 
+type QuickActions = (Omit<QuickActionItemProps, 'children'> & { icon: IconType })[];
 interface NavbarProps {
   brand: string;
   menuItems: Menu[];
   className?: string;
-  quickActions?: QuickActionItemProps[];
+  quickActions?: QuickActions;
   cta?: React.ReactNode;
 }
 
@@ -101,8 +103,10 @@ const Navbar = memo<NavbarProps>(function ({
       </div>
       <div className="navbar__end flex space-x-8 lg:space-x-6">
         <QuickAction className="-my-3 -mx-1">
-          {quickActions.map((e, i) => (
-            <QuickAction.Item key={i} variant="plain" {...e} />
+          {quickActions.map(({ icon: SVG, ...e }, i) => (
+            <QuickAction.Item key={i} variant="plain" {...e}>
+              <SVG strokeWidth={1.5} />
+            </QuickAction.Item>
           ))}
           <QuickActionThemeSwitcher />
         </QuickAction>
