@@ -6,7 +6,7 @@ import { Drawer } from '@andideve/ds-drawer';
 import { dequal } from 'dequal';
 import clsx from 'clsx';
 
-import { IconButtons, IconButtonsProps, MobileMenu } from '@/components/molecules/navbar';
+import { QuickAction, QuickActionItemProps, MobileMenu } from '@/components/molecules/navbar';
 import VerticalRule from '@/components/atoms/vertical-rule';
 import WindowScrollDisabler from '@/components/molecules/window-scroll-disabler';
 import { DisclosureContext } from '@/context/disclosure';
@@ -18,7 +18,7 @@ import { Menu } from '@/types/defaults';
 interface NavbarProps {
   brand: string;
   menuItems: Menu[];
-  iconButtons?: IconButtonsProps['items'];
+  quickActions?: QuickActionItemProps[];
   cta?: React.ReactNode;
 }
 
@@ -26,28 +26,25 @@ function propsAreEqual(prev: NavbarProps, next: NavbarProps) {
   return [
     prev.brand === next.brand,
     dequal(prev.menuItems, next.menuItems),
-    dequal(prev.iconButtons, next.iconButtons),
+    dequal(prev.quickActions, next.quickActions),
     prev.cta === next.cta,
   ].every(Boolean);
 }
 
-function NavIconButtons({ items: _items }: IconButtonsProps) {
-  const themeHandler = useThemeHandler();
+function QuickActionThemeSwitcher() {
+  const { isReady, onChange, icon: SVG } = useThemeHandler();
   return (
-    <IconButtons
-      items={[
-        ..._items,
-        {
-          title: themeHandler.isReady ? 'Switch Theme' : 'Loading...',
-          onClick: themeHandler.onChange,
-          children: themeHandler.icon,
-        },
-      ]}
-    />
+    <QuickAction.Item
+      title={isReady ? 'Switch Theme' : 'Loading...'}
+      variant="tinted"
+      onClick={onChange}
+    >
+      <SVG strokeWidth={1.5} />
+    </QuickAction.Item>
   );
 }
 
-const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [], cta }) {
+const Navbar = memo<NavbarProps>(function ({ brand, menuItems, quickActions = [], cta }) {
   return (
     <Nav
       px={UI.frameX}
@@ -96,7 +93,12 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [],
         </Nav.Links>
       </div>
       <div className="nav__end flex space-x-8 lg:space-x-6">
-        <NavIconButtons items={iconButtons} />
+        <QuickAction className="-my-3 -mx-1">
+          {quickActions.map((e, i) => (
+            <QuickAction.Item key={i} variant="plain" {...e} />
+          ))}
+          <QuickActionThemeSwitcher />
+        </QuickAction>
         <VerticalRule className="my-auto h-7" />
         <DisclosureContext>
           {({ isOpen, onToggle }) => (

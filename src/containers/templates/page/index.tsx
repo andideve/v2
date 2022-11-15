@@ -49,17 +49,17 @@ export const Page: React.FC<PageProps> = ({
         brand={author.name}
         menuItems={siteMenu}
         cta={cta}
-        iconButtons={[
+        quickActions={[
           {
             title: 'GitHub Profile',
             href: author.urls.github,
-            children: FiGithub,
+            children: <FiGithub strokeWidth={1.5} />,
           },
           {
             title: 'Twitter Profile',
             href: author.urls.twitter,
             external: true,
-            children: FiTwitter,
+            children: <FiTwitter strokeWidth={1.5} />,
           },
         ]}
       />
@@ -70,12 +70,12 @@ export const Page: React.FC<PageProps> = ({
     <Footer
       brand={author.name}
       menuItems={extendedSiteMenu}
-      iconButtons={[
+      quickActions={[
         {
           title: 'View Source Code',
           href: EXT_LINKS.ghRepository,
           external: true,
-          children: FiBox,
+          children: <FiBox strokeWidth={1.5} />,
         },
       ]}
       copy="MIT License &copy; 2022 Andi."
