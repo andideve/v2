@@ -54,13 +54,13 @@ export const Page: React.FC<PageProps> = ({
           {
             title: 'GitHub Profile',
             href: author.urls.github,
-            children: <FiGithub strokeWidth={1.5} />,
+            icon: FiGithub,
           },
           {
             title: 'Twitter Profile',
             href: author.urls.twitter,
             external: true,
-            children: <FiTwitter strokeWidth={1.5} />,
+            icon: FiTwitter,
           },
         ]}
       />
@@ -76,7 +76,7 @@ export const Page: React.FC<PageProps> = ({
           title: 'View Source Code',
           href: EXT_LINKS.ghRepository,
           external: true,
-          children: <FiBox strokeWidth={1.5} />,
+          icon: FiBox,
         },
       ]}
       copy="MIT License &copy; 2022 Andi."

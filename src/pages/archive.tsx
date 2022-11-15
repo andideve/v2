@@ -53,9 +53,13 @@ const Archive = memo<PageProps>(function ({ author, projects }) {
             </thead>
             <tbody>
               {projects.map((project, i) => (
-                <tr key={i}>
+                <tr key={i} className="group">
                   <td>
-                    <Typography variant="label-4" color="foreground.secondary">
+                    <Typography
+                      variant="label-4"
+                      color="foreground.secondary"
+                      className="lg:group-hover:text-inherit"
+                    >
                       {new Date(project.date).getFullYear()}
                     </Typography>
                   </td>
