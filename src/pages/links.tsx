@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { Box } from '@andideve/design-system';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
 

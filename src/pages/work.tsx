@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Box, Button } from '@andideve/design-system';
+import { Button } from '@andideve/design-system';
 import { FiPlus } from 'react-icons/fi';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
