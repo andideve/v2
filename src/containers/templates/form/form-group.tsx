@@ -7,7 +7,7 @@ export default function FormGroup({
   ...rest
 }: React.HTMLAttributes<HTMLElement>) {
   return (
-    <div className={clsx('mt-8 first-of-type:mt-0', className)} {...rest}>
+    <div className={clsx('form__group mt-8 first-of-type:mt-0', className)} {...rest}>
       {children}
     </div>
   );

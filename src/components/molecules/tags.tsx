@@ -2,7 +2,7 @@ import { Badge } from '@andideve/design-system';
 
 export default function Tags({ items = [], bordered }: { items?: string[]; bordered?: true }) {
   return (
-    <ul className="list-none flex flex-wrap -mt-2 -ml-[.625rem]">
+    <ul className="tags list-none flex flex-wrap -mt-2 -ml-[.625rem]">
       {items.map((tag, i) => (
         <li key={i} className="mt-2 ml-[.625rem]">
           <Badge

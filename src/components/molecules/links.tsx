@@ -4,9 +4,9 @@ import { FiGithub, FiExternalLink } from 'react-icons/fi';
 
 export default function Links({ github, external }: { github?: string; external?: string }) {
   return (
-    <ul className="list-none flex flex-wrap -m-3">
+    <ul className="links list-none flex flex-wrap -m-3">
       {github && (
-        <li>
+        <li className="links__github">
           <IconButton
             aria-label="GitHub"
             size="lg"
@@ -19,7 +19,7 @@ export default function Links({ github, external }: { github?: string; external?
         </li>
       )}
       {external && (
-        <li>
+        <li className="links__external">
           <IconButton
             aria-label="External Link"
             size="lg"

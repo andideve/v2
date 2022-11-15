@@ -19,8 +19,12 @@ export function MobileMenu({
   style?: React.CSSProperties;
 }) {
   return (
-    <Box backgroundColor="background.elevated.primary" className="overflow-y-auto" {...rest}>
-      <List className="border-t-0 border-x-0">
+    <Box
+      backgroundColor="background.elevated.primary"
+      className="mobile-menu overflow-y-auto"
+      {...rest}
+    >
+      <List className="mobile-menu__list border-t-0 border-x-0">
         {items.map((menu) => (
           <ListItem
             key={menu.to}
@@ -46,7 +50,11 @@ export function MobileMenu({
         ))}
       </List>
       {children && (
-        <Box py={`calc(${UI.navbarH}/2)`} px={UI.frameX} className="text-center">
+        <Box
+          py={`calc(${UI.navbarH}/2)`}
+          px={UI.frameX}
+          className="mobile-menu__bottom text-center"
+        >
           {children}
         </Box>
       )}

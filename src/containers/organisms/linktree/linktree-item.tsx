@@ -71,7 +71,7 @@ function Links({ items }: Pick<Linktree, 'items'>) {
 
 export default function LinktreeItem({ category, items }: Linktree) {
   return (
-    <li>
+    <li className="linktree-item">
       <Typography
         as="h3"
         variant="label-5"

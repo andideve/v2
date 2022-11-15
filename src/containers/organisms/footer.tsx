@@ -32,7 +32,7 @@ const Footer = memo<FooterProps>(function ({ brand, menuItems, quickActions = []
       py={UI.frameY}
       px={UI.frameX}
       backgroundColor="background.elevated.primary"
-      className="lg:text-center"
+      className="footer lg:text-center"
     >
       <hr />
       <div className="brand-and-links footer__row lg:flex lg:items-center mt-6">

@@ -25,7 +25,9 @@ export const QuickAction: QuickActionFC<{
   children?: React.ReactNode;
   className?: string;
 }> = ({ children, className }) => (
-  <ul className={clsx('list-none flex items-center space-x-2', className)}>{children}</ul>
+  <ul className={clsx('quick-action list-none flex items-center space-x-2', className)}>
+    {children}
+  </ul>
 );
 
 QuickAction.Item = Item;

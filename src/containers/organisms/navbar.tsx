@@ -58,9 +58,9 @@ const Navbar = memo<NavbarProps>(function ({
       height={UI.navbarH}
       borderColor="separator.transparent"
       zIndex={9999}
-      className={clsx('justify-between border-b border-solid backdrop-blur-3xl', className)}
+      className={clsx('navbar justify-between border-b border-solid backdrop-blur-3xl', className)}
     >
-      <div className="overflow-hidden absolute inset-0">
+      <div className="navbar__bg overflow-hidden absolute inset-0">
         <Box
           backgroundColor="background.elevated.primary"
           zIndex={-1}
@@ -73,12 +73,12 @@ const Navbar = memo<NavbarProps>(function ({
         />
       </div>
 
-      <Nav.Brand className="nav__start relative z-10">
+      <Nav.Brand className="navbar__start relative z-10">
         <Link href="/" passHref>
           <a className="after:absolute after:inset-0">{brand}</a>
         </Link>
       </Nav.Brand>
-      <div className="nav__center grow lg:absolute lg:inset-0 hidden lg:flex lg:items-center lg:justify-center">
+      <div className="navbar__center grow lg:absolute lg:inset-0 hidden lg:flex lg:items-center lg:justify-center">
         <Nav.Links as="ul">
           {menuItems.map((menu, i) => (
             <li key={i}>
@@ -99,7 +99,7 @@ const Navbar = memo<NavbarProps>(function ({
           ))}
         </Nav.Links>
       </div>
-      <div className="nav__end flex space-x-8 lg:space-x-6">
+      <div className="navbar__end flex space-x-8 lg:space-x-6">
         <QuickAction className="-my-3 -mx-1">
           {quickActions.map((e, i) => (
             <QuickAction.Item key={i} variant="plain" {...e} />

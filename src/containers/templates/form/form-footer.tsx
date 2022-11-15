@@ -12,7 +12,10 @@ export default function FormFooter({
   return (
     <Box
       mt={UI.frameY}
-      className={clsx('flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-4', className)}
+      className={clsx(
+        'form__footer flex flex-col lg:flex-row space-y-3 lg:space-y-0 lg:space-x-4',
+        className,
+      )}
       {...rest}
     >
       {children}

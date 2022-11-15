@@ -41,7 +41,7 @@ const ProjectItem = memo(function ({
       as="article"
       borderColor="separator.default"
       backgroundColor="background.elevated.primary"
-      className="relative col-span-full md:col-span-4 flex flex-col p-6 border rounded-md shadow"
+      className="project-item relative col-span-full md:col-span-4 flex flex-col p-6 border rounded-md shadow"
     >
       <div className="mb-4 min-h-[2.625rem]">
         <SVG strokeWidth={1} className="w-11 h-11" style={{ color: 'var(--ds-colors-accent)' }} />
