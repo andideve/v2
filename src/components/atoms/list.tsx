@@ -19,7 +19,7 @@ export function ListItem({
     <Box
       as="li"
       borderColor="separator.default"
-      className={clsx('flex items-center border-b last-of-type:border-b-0', className)}
+      className={clsx('border-b last-of-type:border-b-0', className)}
       {...rest}
     >
       {children}

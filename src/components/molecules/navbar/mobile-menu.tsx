@@ -9,16 +9,25 @@ import { NavLinkContext } from '@/context/nav-link';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
 
-export function MobileMenu({ children, items }: { items: Menu[]; children?: React.ReactNode }) {
+export function MobileMenu({
+  children,
+  items,
+  ...rest
+}: {
+  items: Menu[];
+  children?: React.ReactNode;
+  style?: React.CSSProperties;
+}) {
   return (
-    <Box
-      height={`calc(100vh - ${UI.navbarH})`}
-      backgroundColor="background.elevated.primary"
-      className="overflow-y-auto"
-    >
+    <Box backgroundColor="background.elevated.primary" className="overflow-y-auto" {...rest}>
       <List className="border-t-0 border-x-0">
         {items.map((menu) => (
-          <ListItem key={menu.to} px={UI.frameX} height={UI.navbarH} className="relative">
+          <ListItem
+            key={menu.to}
+            px={UI.frameX}
+            height={UI.navbarH}
+            className="relative flex items-center"
+          >
             <NavLinkContext to={menu.to} exact={menu.exact}>
               {({ active }) => (
                 <Link href={menu.to} passHref>

@@ -47,7 +47,7 @@ const ProjectItem = memo(function ({
         <SVG strokeWidth={1} className="w-11 h-11" style={{ color: 'var(--ds-colors-accent)' }} />
       </div>
       <div className="grow">
-        <header>
+        <header className="mb-4">
           <time dateTime={date} className="sr-only">
             {date}
           </time>
@@ -55,12 +55,7 @@ const ProjectItem = memo(function ({
             {title}
           </Typography>
         </header>
-        <Typography
-          as="p"
-          variant="label-3"
-          color="foreground.secondary"
-          className="cursor-text mt-4"
-        >
+        <Typography as="p" variant="label-3" color="foreground.secondary" className="cursor-text">
           {description}
         </Typography>
       </div>

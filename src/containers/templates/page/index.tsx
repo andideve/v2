@@ -46,6 +46,7 @@ export const Page: React.FC<PageProps> = ({
     <header>
       <h1 className="sr-only">{title}</h1>
       <Navbar
+        className="fixed top-0 inset-x-0"
         brand={author.name}
         menuItems={siteMenu}
         cta={cta}

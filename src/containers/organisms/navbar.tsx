@@ -18,6 +18,7 @@ import { Menu } from '@/types/defaults';
 interface NavbarProps {
   brand: string;
   menuItems: Menu[];
+  className?: string;
   quickActions?: QuickActionItemProps[];
   cta?: React.ReactNode;
 }
@@ -44,14 +45,20 @@ function QuickActionThemeSwitcher() {
   );
 }
 
-const Navbar = memo<NavbarProps>(function ({ brand, menuItems, quickActions = [], cta }) {
+const Navbar = memo<NavbarProps>(function ({
+  className,
+  brand,
+  menuItems,
+  quickActions = [],
+  cta,
+}) {
   return (
     <Nav
       px={UI.frameX}
       height={UI.navbarH}
       borderColor="separator.transparent"
       zIndex={9999}
-      className="fixed inset-x-0 justify-between border-b border-solid backdrop-blur-3xl"
+      className={clsx('justify-between border-b border-solid backdrop-blur-3xl', className)}
     >
       <div className="overflow-hidden absolute inset-0">
         <Box
@@ -112,6 +119,7 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, quickActions = []
               />
               <Drawer
                 id="main-nav-drawer"
+                position="absolute"
                 isOpen={isOpen}
                 duration={150}
                 placement="top"
@@ -119,7 +127,9 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, quickActions = []
                 zIndex={9999}
                 unmountOnCollapse
               >
-                <MobileMenu items={menuItems}>{cta}</MobileMenu>
+                <MobileMenu items={menuItems} style={{ height: `calc(100vh - ${UI.navbarH})` }}>
+                  {cta}
+                </MobileMenu>
               </Drawer>
             </div>
           )}
@@ -128,6 +138,7 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, quickActions = []
       </div>
     </Nav>
   );
-}, propsAreEqual);
+},
+propsAreEqual);
 
 export default Navbar;
