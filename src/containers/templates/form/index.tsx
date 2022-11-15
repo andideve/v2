@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 
 import FormGroup from './form-group';
 import FormFooter from './form-footer';
@@ -13,7 +14,7 @@ const Form: FormFC<React.FormHTMLAttributes<HTMLFormElement>> = ({
   className,
   ...rest
 }) => (
-  <form className={className} {...rest}>
+  <form className={clsx('form', className)} {...rest}>
     {children}
   </form>
 );

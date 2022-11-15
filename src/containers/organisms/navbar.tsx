@@ -6,7 +6,7 @@ import { Drawer } from '@andideve/ds-drawer';
 import { dequal } from 'dequal';
 import clsx from 'clsx';
 
-import { IconButtons, IconButtonsProps, MobileMenu } from '@/components/molecules/navbar';
+import { QuickAction, QuickActionItemProps, MobileMenu } from '@/components/molecules/navbar';
 import VerticalRule from '@/components/atoms/vertical-rule';
 import WindowScrollDisabler from '@/components/molecules/window-scroll-disabler';
 import { DisclosureContext } from '@/context/disclosure';
@@ -18,7 +18,8 @@ import { Menu } from '@/types/defaults';
 interface NavbarProps {
   brand: string;
   menuItems: Menu[];
-  iconButtons?: IconButtonsProps['items'];
+  className?: string;
+  quickActions?: QuickActionItemProps[];
   cta?: React.ReactNode;
 }
 
@@ -26,37 +27,40 @@ function propsAreEqual(prev: NavbarProps, next: NavbarProps) {
   return [
     prev.brand === next.brand,
     dequal(prev.menuItems, next.menuItems),
-    dequal(prev.iconButtons, next.iconButtons),
+    dequal(prev.quickActions, next.quickActions),
     prev.cta === next.cta,
   ].every(Boolean);
 }
 
-function NavIconButtons({ items: _items }: IconButtonsProps) {
-  const themeHandler = useThemeHandler();
+function QuickActionThemeSwitcher() {
+  const { isReady, onChange, icon: SVG } = useThemeHandler();
   return (
-    <IconButtons
-      items={[
-        ..._items,
-        {
-          title: themeHandler.isReady ? 'Switch Theme' : 'Loading...',
-          onClick: themeHandler.onChange,
-          children: themeHandler.icon,
-        },
-      ]}
-    />
+    <QuickAction.Item
+      title={isReady ? 'Switch Theme' : 'Loading...'}
+      variant="tinted"
+      onClick={onChange}
+    >
+      <SVG strokeWidth={1.5} />
+    </QuickAction.Item>
   );
 }
 
-const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [], cta }) {
+const Navbar = memo<NavbarProps>(function ({
+  className,
+  brand,
+  menuItems,
+  quickActions = [],
+  cta,
+}) {
   return (
     <Nav
       px={UI.frameX}
       height={UI.navbarH}
       borderColor="separator.transparent"
       zIndex={9999}
-      className="fixed inset-x-0 justify-between border-b border-solid backdrop-blur-3xl"
+      className={clsx('navbar justify-between border-b border-solid backdrop-blur-3xl', className)}
     >
-      <div className="overflow-hidden absolute inset-0">
+      <div className="navbar__bg overflow-hidden absolute inset-0">
         <Box
           backgroundColor="background.elevated.primary"
           zIndex={-1}
@@ -69,12 +73,12 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [],
         />
       </div>
 
-      <Nav.Brand className="nav__start relative z-10">
+      <Nav.Brand className="navbar__start relative z-10">
         <Link href="/" passHref>
           <a className="after:absolute after:inset-0">{brand}</a>
         </Link>
       </Nav.Brand>
-      <div className="nav__center grow lg:absolute lg:inset-0 hidden lg:flex lg:items-center lg:justify-center">
+      <div className="navbar__center grow lg:absolute lg:inset-0 hidden lg:flex lg:items-center lg:justify-center">
         <Nav.Links as="ul">
           {menuItems.map((menu, i) => (
             <li key={i}>
@@ -95,8 +99,13 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [],
           ))}
         </Nav.Links>
       </div>
-      <div className="nav__end flex space-x-8 lg:space-x-6">
-        <NavIconButtons items={iconButtons} />
+      <div className="navbar__end flex space-x-8 lg:space-x-6">
+        <QuickAction className="-my-3 -mx-1">
+          {quickActions.map((e, i) => (
+            <QuickAction.Item key={i} variant="plain" {...e} />
+          ))}
+          <QuickActionThemeSwitcher />
+        </QuickAction>
         <VerticalRule className="my-auto h-7" />
         <DisclosureContext>
           {({ isOpen, onToggle }) => (
@@ -110,6 +119,7 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [],
               />
               <Drawer
                 id="main-nav-drawer"
+                position="absolute"
                 isOpen={isOpen}
                 duration={150}
                 placement="top"
@@ -117,7 +127,9 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [],
                 zIndex={9999}
                 unmountOnCollapse
               >
-                <MobileMenu items={menuItems}>{cta}</MobileMenu>
+                <MobileMenu items={menuItems} style={{ height: `calc(100vh - ${UI.navbarH})` }}>
+                  {cta}
+                </MobileMenu>
               </Drawer>
             </div>
           )}
@@ -126,6 +138,7 @@ const Navbar = memo<NavbarProps>(function ({ brand, menuItems, iconButtons = [],
       </div>
     </Nav>
   );
-}, propsAreEqual);
+},
+propsAreEqual);
 
 export default Navbar;

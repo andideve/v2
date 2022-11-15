@@ -4,7 +4,7 @@ import { Box } from '@andideve/design-system';
 import { Navbar as Nav } from '@andideve/ds-navbar';
 import { dequal } from 'dequal';
 
-import { IconButtons, IconButtonsProps } from '@/components/molecules/navbar/icon-buttons';
+import { QuickAction, QuickActionItemProps } from '@/components/molecules/navbar/quick-action';
 import Typography from '@/components/atoms/typography';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
@@ -12,7 +12,7 @@ import { Menu } from '@/types/defaults';
 interface FooterProps {
   brand: string;
   menuItems: Menu[];
-  iconButtons?: IconButtonsProps['items'];
+  quickActions?: QuickActionItemProps[];
   copy?: React.ReactNode;
 }
 
@@ -20,19 +20,19 @@ function propsAreEqual(prev: FooterProps, next: FooterProps) {
   return [
     prev.brand === prev.brand,
     dequal(prev.menuItems, prev.menuItems),
-    dequal(prev.iconButtons, prev.iconButtons),
+    dequal(prev.quickActions, prev.quickActions),
     prev.copy === prev.copy,
   ].every(Boolean);
 }
 
-const Footer = memo<FooterProps>(function ({ brand, menuItems, iconButtons = [], copy }) {
+const Footer = memo<FooterProps>(function ({ brand, menuItems, quickActions = [], copy }) {
   return (
     <Box
       as="footer"
       py={UI.frameY}
       px={UI.frameX}
       backgroundColor="background.elevated.primary"
-      className="lg:text-center"
+      className="footer lg:text-center"
     >
       <hr />
       <div className="brand-and-links footer__row lg:flex lg:items-center mt-6">
@@ -58,9 +58,13 @@ const Footer = memo<FooterProps>(function ({ brand, menuItems, iconButtons = [],
             ))}
           </Nav.Links>
         </div>
-        {iconButtons.length ? (
+        {quickActions.length ? (
           <div className="brand-and-links__end footer__row--brand-and-links mt-6 lg:mt-0">
-            <IconButtons items={iconButtons} />
+            <QuickAction className="-m-3">
+              {quickActions.map((e, i) => (
+                <QuickAction.Item key={i} variant="plain" {...e} />
+              ))}
+            </QuickAction>
           </div>
         ) : null}
       </div>

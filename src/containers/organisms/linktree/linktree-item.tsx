@@ -51,7 +51,7 @@ const Link = memo<LinkProps>(function ({ label, href }) {
       </div>
       <FiExternalLink
         strokeWidth={1.5}
-        className="opacity-80 w-4 h-4 group-focus:opacity-100 lg:group-hover:opacity-100"
+        className="opacity-80 group-focus:opacity-100 lg:group-hover:opacity-100 w-4 h-4"
       />
     </Anchor>
   );
@@ -71,7 +71,7 @@ function Links({ items }: Pick<Linktree, 'items'>) {
 
 export default function LinktreeItem({ category, items }: Linktree) {
   return (
-    <li>
+    <li className="linktree-item">
       <Typography
         as="h3"
         variant="label-5"

@@ -4,7 +4,12 @@ import clsx from 'clsx';
 
 export function List({ as = 'ul', children, className, ...rest }: BoxProps) {
   return (
-    <Box as={as} borderColor="separator.default" className={clsx('border', className)} {...rest}>
+    <Box
+      as={as}
+      borderColor="separator.default"
+      className={clsx('list border', className)}
+      {...rest}
+    >
       {children}
     </Box>
   );
@@ -19,7 +24,7 @@ export function ListItem({
     <Box
       as="li"
       borderColor="separator.default"
-      className={clsx('flex items-center border-b last-of-type:border-b-0', className)}
+      className={clsx('border-b last-of-type:border-b-0', className)}
       {...rest}
     >
       {children}
