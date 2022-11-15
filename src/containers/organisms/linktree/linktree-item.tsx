@@ -1,6 +1,13 @@
 import React, { useMemo, memo } from 'react';
 import { StyledBox } from '@andideve/design-system';
-import { FiLinkedin, FiTwitter, FiGithub, FiDribbble, FiExternalLink } from 'react-icons/fi';
+import {
+  FiLinkedin,
+  FiTwitter,
+  FiGithub,
+  FiCodesandbox,
+  FiDribbble,
+  FiExternalLink,
+} from 'react-icons/fi';
 import { FaDiscord, FaSpotify } from 'react-icons/fa';
 import type { IconType } from 'react-icons';
 
@@ -21,6 +28,9 @@ function getAppearance(label: string): { icon: null | IconType; color?: string }
   }
   if (/^github$/i.test(label)) {
     return { icon: FiGithub };
+  }
+  if (/^codesandbox$/i.test(label)) {
+    return { icon: FiCodesandbox };
   }
   if (/^dribbble$/i.test(label)) {
     return { icon: FiDribbble };
