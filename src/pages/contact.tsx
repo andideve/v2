@@ -6,6 +6,7 @@ import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Section from '@/containers/templates/section';
+import HeaderContent from '@/containers/templates/header-content';
 import Form from '@/containers/templates/form';
 import Typography from '@/components/atoms/typography';
 import { UI } from '@/config/globals';
@@ -81,25 +82,35 @@ const Contact = memo<PageProps>(function ({ author }) {
     <Page author={author} title="Contact">
       <Section spacing="1" containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
         <Section.Header>
-          <Typography as="h2" variant="title-1">
-            Hey! Wanna collaborate?
-          </Typography>
+          <HeaderContent
+            title={
+              <Typography as="h2" variant="title-1">
+                Hey! Wanna collaborate?
+              </Typography>
+            }
+          />
         </Section.Header>
         <Form onSubmit={form.handleSubmit(pushData)} onReset={onReset}>
           <Form.Group>{inputs.name}</Form.Group>
           <Form.Group>{inputs.from}</Form.Group>
           <Box mt={UI.frameY} className="mb-12">
-            <Typography as="h3" variant="title-2">
-              Share your idea with me
-            </Typography>
-            <Typography
-              as="p"
-              variant="label-2"
-              color="foreground.secondary"
-              className="cursor-text mt-4"
-            >
-              Shoot me a direct email and I will get in touch with you as soon as possible.
-            </Typography>
+            <HeaderContent
+              title={
+                <Typography as="h3" variant="title-2">
+                  Share your idea with me
+                </Typography>
+              }
+              description={
+                <Typography
+                  as="p"
+                  variant="label-2"
+                  color="foreground.secondary"
+                  className="cursor-text"
+                >
+                  Shoot me a direct email and I will get in touch with you as soon as possible.
+                </Typography>
+              }
+            />
           </Box>
           <Form.Group>{inputs.body}</Form.Group>
           <Form.Footer>

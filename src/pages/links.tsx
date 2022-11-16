@@ -4,6 +4,7 @@ import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Section from '@/containers/templates/section';
+import HeaderContent from '@/containers/templates/header-content';
 import Linktree from '@/containers/organisms/linktree';
 import Typography from '@/components/atoms/typography';
 import { UI } from '@/config/globals';
@@ -25,17 +26,23 @@ const Links = memo<PageProps>(function ({ author, linktrees }) {
     <Page author={author} title="Links">
       <Section spacing="1" containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
         <Section.Header>
-          <Typography as="h2" variant="title-1">
-            @{author.name}
-          </Typography>
-          <Typography
-            as="p"
-            variant="label-1"
-            color="foreground.secondary"
-            className="cursor-text mt-4"
-          >
-            {author.description}
-          </Typography>
+          <HeaderContent
+            title={
+              <Typography as="h2" variant="title-1">
+                @{author.name}
+              </Typography>
+            }
+            description={
+              <Typography
+                as="p"
+                variant="label-1"
+                color="foreground.secondary"
+                className="cursor-text"
+              >
+                {author.description}
+              </Typography>
+            }
+          />
         </Section.Header>
         <Linktree.List>
           {linktrees.map((linktree, i) => (

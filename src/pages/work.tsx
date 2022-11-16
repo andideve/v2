@@ -6,6 +6,7 @@ import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Section from '@/containers/templates/section';
+import HeaderContent from '@/containers/templates/header-content';
 import Project from '@/containers/organisms/project';
 import Typography from '@/components/atoms/typography';
 import { ShowMoreContext } from '@/context/show-more';
@@ -36,9 +37,13 @@ const Work = memo<PageProps>(function ({ author, projects, tags }) {
     <Page author={author} title="My Work">
       <Section spacing="1" minHeight={`calc(100vh - ${UI.navbarH})`}>
         <Section.Header>
-          <Typography as="h2" variant="title-1">
-            My Work
-          </Typography>
+          <HeaderContent
+            title={
+              <Typography as="h2" variant="title-1">
+                My Work
+              </Typography>
+            }
+          />
           <Typography as="p" color="foreground.secondary" className="mt-8 mb-4">
             Search by topics
           </Typography>
