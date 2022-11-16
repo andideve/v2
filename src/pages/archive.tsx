@@ -5,6 +5,7 @@ import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Section from '@/containers/templates/section';
+import HeaderContent from '@/containers/templates/header-content';
 import Tags from '@/components/molecules/tags';
 import Links from '@/components/molecules/links';
 import Typography from '@/components/atoms/typography';
@@ -29,17 +30,23 @@ const Archive = memo<PageProps>(function ({ author, projects }) {
     <Page author={author} title="Archive">
       <Section spacing="1" minHeight={`calc(100vh - ${UI.navbarH})`}>
         <Section.Header>
-          <Typography as="h2" variant="title-1">
-            Archive
-          </Typography>
-          <Typography
-            as="p"
-            variant="label-1"
-            color="foreground.secondary"
-            className="cursor-text mt-4"
-          >
-            A big list of things I&apos;ve worked on.
-          </Typography>
+          <HeaderContent
+            title={
+              <Typography as="h2" variant="title-1">
+                Archive
+              </Typography>
+            }
+            description={
+              <Typography
+                as="p"
+                variant="label-1"
+                color="foreground.secondary"
+                className="cursor-text"
+              >
+                A big list of things I&apos;ve worked on.
+              </Typography>
+            }
+          />
         </Section.Header>
         <Box borderColor="separator.default" className="p-3 border rounded-xl">
           <Table hoverable>
