@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Box, Table } from '@andideve/design-system';
+import { Table } from '@andideve/design-system';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
 

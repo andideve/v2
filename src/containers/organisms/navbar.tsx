@@ -117,6 +117,7 @@ const Navbar = memo<NavbarProps>(function ({
               <WindowScrollDisabler disable={isOpen} />
               <Nav.Toggle
                 aria-controls="main-nav-drawer"
+                aria-expanded={isOpen}
                 className="-mx-3"
                 expanded={isOpen}
                 onClick={onToggle}

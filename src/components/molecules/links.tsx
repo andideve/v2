@@ -5,33 +5,22 @@ import { FiGithub, FiExternalLink } from 'react-icons/fi';
 export default function Links({ github, external }: { github?: string; external?: string }) {
   return (
     <ul className="links list-none flex flex-wrap -m-3">
-      {github && (
-        <li className="links__github">
+      {[
+        { label: 'GitHub', url: github, icon: FiGithub },
+        { label: 'External', url: external, icon: FiExternalLink },
+      ].map((e) => (
+        <li key={e.label}>
           <IconButton
-            aria-label="GitHub"
+            aria-label={e.label}
             size="lg"
             variant="plain"
-            href={github}
+            href={e.url}
             className="before:hidden"
           >
-            <FiGithub />
+            <e.icon />
           </IconButton>
         </li>
-      )}
-      {external && (
-        <li className="links__external">
-          <IconButton
-            aria-label="External Link"
-            size="lg"
-            variant="plain"
-            href={external}
-            className="before:hidden"
-            external
-          >
-            <FiExternalLink />
-          </IconButton>
-        </li>
-      )}
+      ))}
     </ul>
   );
 }

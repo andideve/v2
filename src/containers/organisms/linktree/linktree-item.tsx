@@ -16,29 +16,18 @@ import { Linktree } from '@/types/linktree';
 
 const Anchor = StyledBox.withComponent('a');
 
-function getAppearance(label: string): { icon: null | IconType; color?: string } {
-  if (/^discord$/i.test(label)) {
-    return { icon: FaDiscord };
-  }
-  if (/^linkedin$/i.test(label)) {
-    return { icon: FiLinkedin };
-  }
-  if (/^twitter$/i.test(label)) {
-    return { icon: FiTwitter };
-  }
-  if (/^github$/i.test(label)) {
-    return { icon: FiGithub };
-  }
-  if (/^codesandbox$/i.test(label)) {
-    return { icon: FiCodesandbox };
-  }
-  if (/^dribbble$/i.test(label)) {
-    return { icon: FiDribbble };
-  }
-  if (/^spotify$/i.test(label)) {
-    return { icon: FaSpotify };
-  }
-  return { icon: null };
+function getAppearance(label: string) {
+  const record: Record<string, { icon: null | IconType; color?: string }> = {
+    discord: { icon: FaDiscord },
+    linkedin: { icon: FiLinkedin },
+    twitter: { icon: FiTwitter },
+    github: { icon: FiGithub },
+    codesandbox: { icon: FiCodesandbox },
+    dribbble: { icon: FiDribbble },
+    spotify: { icon: FaSpotify },
+  };
+
+  return record[label.toLowerCase()] ?? { icon: null };
 }
 
 type LinkProps = Pick<Linktree['items'][0], 'label' | 'href'>;
