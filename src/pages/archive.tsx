@@ -9,6 +9,7 @@ import HeaderContent from '@/containers/templates/header-content';
 import Tags from '@/components/molecules/tags';
 import Links from '@/components/molecules/links';
 import Typography from '@/components/atoms/typography';
+import TableFrame from '@/components/atoms/table-frame';
 import { UI } from '@/config/globals';
 import { Project } from '@/types/project';
 import Services from '@/services';
@@ -48,7 +49,7 @@ const Archive = memo<PageProps>(function ({ author, projects }) {
             }
           />
         </Section.Header>
-        <Box borderColor="separator.default" className="p-3 border rounded-xl">
+        <TableFrame>
           <Table hoverable>
             <thead>
               <tr>
@@ -85,7 +86,7 @@ const Archive = memo<PageProps>(function ({ author, projects }) {
               ))}
             </tbody>
           </Table>
-        </Box>
+        </TableFrame>
       </Section>
     </Page>
   );
