@@ -43,7 +43,7 @@ const Contact = memo<PageProps>(function ({ author }) {
 
   const inputs: Record<keyof Omit<Email, 'subject'>, React.ReactElement> = {
     name: (
-      <label htmlFor="name">
+      <label htmlFor="name" className="block">
         <Input
           type="text"
           variant="flushed"
@@ -55,7 +55,7 @@ const Contact = memo<PageProps>(function ({ author }) {
       </label>
     ),
     from: (
-      <label htmlFor="from">
+      <label htmlFor="from" className="block">
         <Input
           type="email"
           variant="flushed"
@@ -67,7 +67,7 @@ const Contact = memo<PageProps>(function ({ author }) {
       </label>
     ),
     body: (
-      <label htmlFor="body">
+      <label htmlFor="body" className="block">
         <TextArea
           variant="flushed"
           placeholder="Write a Message *"
@@ -91,8 +91,10 @@ const Contact = memo<PageProps>(function ({ author }) {
           />
         </Section.Header>
         <Form onSubmit={form.handleSubmit(pushData)} onReset={onReset}>
-          <Form.Group>{inputs.name}</Form.Group>
-          <Form.Group>{inputs.from}</Form.Group>
+          <Form.Groups>
+            {inputs.name}
+            {inputs.from}
+          </Form.Groups>
           <Box mt={UI.frameY} className="mb-12">
             <HeaderContent
               title={
@@ -112,7 +114,7 @@ const Contact = memo<PageProps>(function ({ author }) {
               }
             />
           </Box>
-          <Form.Group>{inputs.body}</Form.Group>
+          {inputs.body}
           <Form.Footer>
             <Button type="submit" size="lg" variant="filled" disabled={loading}>
               Send message
