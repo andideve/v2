@@ -1,13 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
 
-export default function FormGroup({
+export default function FormGroups({
   children,
   className,
   ...rest
 }: React.HTMLAttributes<HTMLElement>) {
   return (
-    <div className={clsx('form__group mt-8 first-of-type:mt-0', className)} {...rest}>
+    <div className={clsx('form__groups space-y-8', className)} {...rest}>
       {children}
     </div>
   );

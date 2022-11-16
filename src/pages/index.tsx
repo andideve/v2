@@ -7,6 +7,7 @@ import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Section from '@/containers/templates/section';
+import HeaderContent from '@/containers/templates/header-content';
 import Project from '@/containers/organisms/project';
 import Typing from '@/components/molecules/typing';
 import Typography from '@/components/atoms/typography';
@@ -38,12 +39,18 @@ const Hero = memo<{ author: Author }>(function ({ author }) {
     >
       <header>
         <h2>
-          <Typing as="div" color="accent" className="mb-4">
-            {greeting}
-          </Typing>
-          <Typography as="div" variant="title-1">
-            {author.description}
-          </Typography>
+          <HeaderContent
+            title={
+              <Typing as="div" color="accent">
+                {greeting}
+              </Typing>
+            }
+            description={
+              <Typography as="div" variant="title-1">
+                {author.description}
+              </Typography>
+            }
+          />
         </h2>
       </header>
       {author.intro && (
@@ -64,14 +71,20 @@ const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
   return (
     <Section spacing="2" centered>
       <Section.Header>
-        <Typography as="h2" variant="title-2">
-          Latest my work
-        </Typography>
-        <Link href={SITE_PATHS.work} passHref>
-          <Typography as="a" color="accent" className="inline-block mt-4">
-            view all projects
-          </Typography>
-        </Link>
+        <HeaderContent
+          title={
+            <Typography as="h2" variant="title-2">
+              Latest my work
+            </Typography>
+          }
+          description={
+            <Link href={SITE_PATHS.work} passHref>
+              <Typography as="a" color="accent" className="inline-block">
+                view all projects
+              </Typography>
+            </Link>
+          }
+        />
       </Section.Header>
       <ShowLessContext items={items} limit={3}>
         {({ list, shouldRenderButton, isOpen, onToggle }) => (
