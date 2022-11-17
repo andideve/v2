@@ -111,7 +111,7 @@ const Navbar = memo<NavbarProps>(function ({
           ))}
           <QuickActionThemeSwitcher />
         </QuickAction>
-        <VerticalRule className="my-auto h-7" />
+        <VerticalRule className="my-auto h-6" />
         <DisclosureContainer>
           {({ isOpen, onToggle }) => (
             <div className="block lg:hidden">
