@@ -8,8 +8,8 @@ import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Section from '@/containers/templates/section';
 import HeaderContent from '@/containers/templates/header-content';
 import Project from '@/containers/organisms/project';
+import ShowMoreContainer from '@/components/molecules/showmore-container';
 import Typography from '@/components/atoms/typography';
-import { ShowMoreContext } from '@/context/show-more';
 import useSearch from '@/hooks/use-search';
 import { UI } from '@/config/globals';
 import { Project as ProjectType } from '@/types/project';
@@ -74,7 +74,7 @@ const Work = memo<PageProps>(function ({ author, projects, tags }) {
             Couldn&apos;t find anything to match your criteria. Sorry.
           </Typography>
         )}
-        <ShowMoreContext items={finder.shouldRender ? finder.list : projects} limit={9}>
+        <ShowMoreContainer items={finder.shouldRender ? finder.list : projects} limit={9}>
           {({ list, shouldRenderButton, onShowMore }) => (
             <>
               <Project.List>
@@ -91,7 +91,7 @@ const Work = memo<PageProps>(function ({ author, projects, tags }) {
               )}
             </>
           )}
-        </ShowMoreContext>
+        </ShowMoreContainer>
       </Section>
     </Page>
   );
