@@ -17,21 +17,17 @@ import Services from '@/services';
 
 interface PageProps extends PageDataProps {
   projects: ProjectType[];
-  tags: string[];
 }
 
-export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => {
-  const projects = await Services.getProjects({ archived: false, sort: 'DESC' }).then(
-    (res) => res.projects,
-  );
-  const tags = Array.from(new Set(projects.map((project) => project.tags ?? []).flat()));
+export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
+  props: {
+    projects: await Services.getProjects({ archived: false, sort: 'DESC' }).then(
+      (res) => res.projects,
+    ),
+  },
+}));
 
-  return {
-    props: { projects, tags },
-  };
-});
-
-const Work = memo<PageProps>(function ({ author, projects, tags }) {
+const Work = memo<PageProps>(function ({ author, projects }) {
   const finder = useSearch(projects);
   return (
     <Page author={author} title="My Work">
@@ -48,22 +44,22 @@ const Work = memo<PageProps>(function ({ author, projects, tags }) {
             Search by topics
           </Typography>
           <form className="flex flex-wrap -mt-2 -ml-[.875rem]">
-            {tags.map((tag) => (
+            {finder.options.map((option) => (
               <Button
-                key={tag}
+                key={option.value}
                 as="label"
-                variant={finder.isActive(tag) ? 'filled' : 'gray'}
+                variant={option.selected ? 'filled' : 'gray'}
                 rounded="full"
                 className="relative mt-2 ml-[.875rem]"
-                disabled={finder.isDisabledOption(tag)}
+                disabled={option.disabled}
               >
-                {tag}
+                {option.value}
                 <input
                   type="checkbox"
-                  value={tag}
-                  checked={finder.isActive(tag)}
+                  value={option.value}
+                  checked={option.selected}
                   className="opacity-0 absolute inset-0"
-                  onChange={finder.onToggle(tag)}
+                  onChange={finder.onChange}
                 />
               </Button>
             ))}
@@ -74,7 +70,7 @@ const Work = memo<PageProps>(function ({ author, projects, tags }) {
             Couldn&apos;t find anything to match your criteria. Sorry.
           </Typography>
         )}
-        <ShowMoreContainer items={finder.shouldRender ? finder.list : projects} limit={9}>
+        <ShowMoreContainer items={finder.list} limit={9}>
           {({ list, shouldRenderButton, onShowMore }) => (
             <>
               <Project.List>
