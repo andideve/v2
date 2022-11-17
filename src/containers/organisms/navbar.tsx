@@ -10,8 +10,8 @@ import type { IconType } from 'react-icons';
 import { QuickAction, QuickActionItemProps, MobileMenu } from '@/components/molecules/navbar';
 import VerticalRule from '@/components/atoms/vertical-rule';
 import WindowScrollDisabler from '@/components/molecules/window-scroll-disabler';
-import { DisclosureContext } from '@/context/disclosure';
-import { NavLinkContext } from '@/context/nav-link';
+import DisclosureContainer from '@/components/molecules/disclosure-container';
+import NavLinkContainer from '@/components/molecules/navlink-container';
 import useThemeHandler from '@/hooks/use-theme-handler';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
@@ -54,6 +54,7 @@ const Navbar = memo<NavbarProps>(function ({
   quickActions = [],
   cta,
 }) {
+  console.log('[Navbar] render');
   return (
     <Nav
       px={UI.frameX}
@@ -84,7 +85,7 @@ const Navbar = memo<NavbarProps>(function ({
         <Nav.Links as="ul">
           {menuItems.map((menu, i) => (
             <li key={i}>
-              <NavLinkContext to={menu.to} exact={menu.exact}>
+              <NavLinkContainer to={menu.to} exact={menu.exact}>
                 {({ active }) => (
                   <Link href={menu.to} passHref>
                     <Nav.Link
@@ -96,7 +97,7 @@ const Navbar = memo<NavbarProps>(function ({
                     </Nav.Link>
                   </Link>
                 )}
-              </NavLinkContext>
+              </NavLinkContainer>
             </li>
           ))}
         </Nav.Links>
@@ -110,8 +111,8 @@ const Navbar = memo<NavbarProps>(function ({
           ))}
           <QuickActionThemeSwitcher />
         </QuickAction>
-        <VerticalRule className="my-auto h-7" />
-        <DisclosureContext>
+        <VerticalRule className="my-auto h-6" />
+        <DisclosureContainer>
           {({ isOpen, onToggle }) => (
             <div className="block lg:hidden">
               <WindowScrollDisabler disable={isOpen} />
@@ -138,7 +139,7 @@ const Navbar = memo<NavbarProps>(function ({
               </Drawer>
             </div>
           )}
-        </DisclosureContext>
+        </DisclosureContainer>
         {cta && <div className="hidden lg:block">{cta}</div>}
       </div>
     </Nav>

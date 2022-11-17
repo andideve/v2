@@ -3,9 +3,9 @@ import React from 'react';
 import { Box } from '@andideve/design-system';
 import clsx from 'clsx';
 
+import NavLinkContainer from '@/components/molecules/navlink-container';
 import { List, ListItem } from '@/components/atoms/list';
 import Typography from '@/components/atoms/typography';
-import { NavLinkContext } from '@/context/nav-link';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
 
@@ -32,7 +32,7 @@ export function MobileMenu({
             height={UI.navbarH}
             className="relative flex items-center"
           >
-            <NavLinkContext to={menu.to} exact={menu.exact}>
+            <NavLinkContainer to={menu.to} exact={menu.exact}>
               {({ active }) => (
                 <Link href={menu.to} passHref>
                   <Typography
@@ -45,7 +45,7 @@ export function MobileMenu({
                   </Typography>
                 </Link>
               )}
-            </NavLinkContext>
+            </NavLinkContainer>
           </ListItem>
         ))}
       </List>
