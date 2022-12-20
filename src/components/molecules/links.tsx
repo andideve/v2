@@ -9,17 +9,21 @@ export default function Links({ github, external }: { github?: string; external?
         { label: 'GitHub', url: github, icon: FiGithub },
         { label: 'External', url: external, icon: FiExternalLink },
       ].map((e) => (
-        <li key={e.label}>
-          <IconButton
-            aria-label={e.label}
-            size="lg"
-            variant="plain"
-            href={e.url}
-            className="before:hidden"
-          >
-            <e.icon />
-          </IconButton>
-        </li>
+        <React.Fragment key={e.label}>
+          {e.url && (
+            <li>
+              <IconButton
+                aria-label={e.label}
+                size="lg"
+                variant="plain"
+                href={e.url}
+                className="before:hidden"
+              >
+                <e.icon />
+              </IconButton>
+            </li>
+          )}
+        </React.Fragment>
       ))}
     </ul>
   );
