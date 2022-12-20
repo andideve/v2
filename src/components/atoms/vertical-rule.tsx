@@ -8,9 +8,8 @@ export default function VerticalRule({ className, ...rest }: Omit<BoxProps, 'chi
       as="span"
       role="separator"
       aria-orientation="vertical"
-      borderRightWidth={1}
       borderColor="separator.transparent"
-      className={clsx('vertical-rule', className)}
+      className={clsx('vertical-rule border-r', className)}
       {...rest}
     />
   );
