@@ -1,6 +1,8 @@
-import { Badge } from '@andideve/design-system';
+import { Badge, Theme } from '@andideve/design-system';
+import { useTheme } from '@emotion/react';
 
 export default function Tags({ items = [], bordered }: { items?: string[]; bordered?: true }) {
+  const theme = useTheme() as Theme;
   return (
     <ul className="tags list-none flex flex-wrap -mt-2 -ml-[.625rem]">
       {items.map((tag) => (
@@ -9,7 +11,7 @@ export default function Tags({ items = [], bordered }: { items?: string[]; borde
             size="xs"
             variant="gray"
             className={bordered ? 'border' : undefined}
-            style={bordered ? { borderColor: 'var(--ds-colors-separator-default)' } : undefined}
+            style={bordered ? { borderColor: theme.colors.separator.default } : undefined}
           >
             {tag}
           </Badge>
