@@ -1,12 +1,12 @@
 import React from 'react';
 import useShowLess from '@/hooks/use-show-less';
 
-export default function DisclosureContainer({
+export default function ShowLessContainer({
   children,
   items,
   limit,
 }: {
-  children: React.FC<ReturnType<typeof useShowLess>>;
+  children: (props: ReturnType<typeof useShowLess>) => React.ReactElement;
   items: unknown[];
   limit: number;
 }) {
