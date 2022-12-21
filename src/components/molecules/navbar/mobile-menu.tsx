@@ -52,7 +52,7 @@ export function MobileMenu({
         <Box
           py={`calc(${UI.navbarH}/2)`}
           px={UI.frameX}
-          className="mobile-menu__bottom text-center"
+          className="mobile-menu__bottom flex justify-center"
         >
           {children}
         </Box>
