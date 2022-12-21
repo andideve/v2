@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { Box } from '@andideve/design-system';
+import { Box, BoxProps } from '@andideve/design-system';
 import clsx from 'clsx';
 
 import NavLinkContainer from '@/components/molecules/navlink-container';
@@ -11,17 +11,16 @@ import { Menu } from '@/types/defaults';
 
 export function MobileMenu({
   children,
+  className,
   items,
   ...rest
 }: {
   items: Menu[];
-  children?: React.ReactNode;
-  style?: React.CSSProperties;
-}) {
+} & Pick<BoxProps, 'children' | 'className' | 'height'>) {
   return (
     <Box
       backgroundColor="background.elevated.primary"
-      className="mobile-menu overflow-y-auto"
+      className={clsx('mobile-menu', className)}
       {...rest}
     >
       <List className="mobile-menu__list border-t-0 border-x-0">
@@ -53,7 +52,7 @@ export function MobileMenu({
         <Box
           py={`calc(${UI.navbarH}/2)`}
           px={UI.frameX}
-          className="mobile-menu__bottom text-center"
+          className="mobile-menu__bottom flex justify-center"
         >
           {children}
         </Box>

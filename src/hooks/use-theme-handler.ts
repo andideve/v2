@@ -17,7 +17,9 @@ export default function useThemeHandler() {
     if (!initializing) themeQueue.reset(themes.indexOf(theme));
   }, [initializing]);
 
-  useEffect(() => changeTheme(themes[themeQueue.currIndex]), [themeQueue.currIndex]);
+  useEffect(() => {
+    if (!initializing) changeTheme(themes[themeQueue.currIndex]);
+  }, [themeQueue.currIndex]);
 
   const icon = (
     {

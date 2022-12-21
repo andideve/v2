@@ -92,8 +92,8 @@ const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
         {({ list, shouldRenderButton, isOpen, onToggle }) => (
           <>
             <Project.List>
-              {list.map((project, i) => (
-                <Project.Item key={i} {...(project as ProjectType)} />
+              {list.map((project) => (
+                <Project.Item key={(project as ProjectType).title} {...(project as ProjectType)} />
               ))}
             </Project.List>
             {shouldRenderButton && (

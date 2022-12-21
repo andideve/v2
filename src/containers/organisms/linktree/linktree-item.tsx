@@ -59,8 +59,8 @@ const Link = memo<LinkProps>(function ({ label, href }) {
 function Links({ items }: Pick<Linktree, 'items'>) {
   return (
     <ul className="list-none space-y-4">
-      {items.map((link, i) => (
-        <li key={i}>
+      {items.map((link) => (
+        <li key={link.label}>
           <Link label={link.label} href={link.href} />
         </li>
       ))}

@@ -5,7 +5,7 @@ export default function DisclosureContainer({
   children,
   init,
 }: {
-  children: React.FC<ReturnType<typeof useDisclosure>>;
+  children: (props: ReturnType<typeof useDisclosure>) => React.ReactElement;
   init?: boolean;
 }) {
   const value = useDisclosure(init);

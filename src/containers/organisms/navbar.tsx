@@ -83,8 +83,8 @@ const Navbar = memo<NavbarProps>(function ({
       </Nav.Brand>
       <div className="navbar__center grow lg:absolute lg:inset-0 hidden lg:flex lg:items-center lg:justify-center">
         <Nav.Links as="ul">
-          {menuItems.map((menu, i) => (
-            <li key={i}>
+          {menuItems.map((menu) => (
+            <li key={menu.label}>
               <NavLinkContainer to={menu.to} exact={menu.exact}>
                 {({ active }) => (
                   <Link href={menu.to} passHref>
@@ -133,7 +133,11 @@ const Navbar = memo<NavbarProps>(function ({
                 zIndex={9999}
                 unmountOnCollapse
               >
-                <MobileMenu items={menuItems} style={{ height: `calc(100vh - ${UI.navbarH})` }}>
+                <MobileMenu
+                  items={menuItems}
+                  height={`calc(100vh - ${UI.navbarH})`}
+                  className="overflow-y-auto"
+                >
                   {cta}
                 </MobileMenu>
               </Drawer>
