@@ -2,14 +2,8 @@ import { useEffect, useReducer, Reducer } from 'react';
 
 import themeStorage from '@/utils/client/storage/theme';
 import getSystemColorScheme from '@/utils/client/system-color-scheme';
+import isValidTheme from '@/utils/client/is-valid-theme';
 import { Themes, ColorSchemes } from '@/types/globals';
-
-const THEMES_REGEX = /^(system|light|dark)$/;
-
-function isThemes(arg: any): arg is Themes {
-  if (typeof arg !== 'string') return false;
-  return THEMES_REGEX.test(arg);
-}
 
 type State = {
   readonly initializing: boolean;
@@ -89,7 +83,7 @@ export default function useColorScheme(init: ColorSchemes = 'dark') {
   useEffect(() => {
     initStart();
     const localTheme = themeStorage.get();
-    if (isThemes(localTheme)) changeTheme(localTheme);
+    if (isValidTheme(localTheme)) changeTheme(localTheme);
     initDone();
   }, []);
 
