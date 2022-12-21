@@ -8,10 +8,10 @@ const blinkKeyframes = keyframes({
   '50%': { opacity: 0 },
 });
 
-const Cursor = styled.span<{ typingDone?: boolean }>(
+const Cursor = styled.span<{ blinking?: boolean }>(
   blinkKeyframes.styles,
-  ({ typingDone }) => {
-    if (!typingDone) return {};
+  ({ blinking }) => {
+    if (!blinking) return {};
     return {
       animation: `${blinkKeyframes.name} 1.075s infinite`,
     };
@@ -32,10 +32,11 @@ export default function Typing({
   ...rest
 }: { children: string } & Omit<TypographyProps, 'children'>) {
   const result = useTyping(children);
+  const typingDone = result === children;
   return (
     <Typography {...rest}>
       {result}
-      <Cursor typingDone={result === children} />
+      <Cursor blinking={typingDone} />
     </Typography>
   );
 }
