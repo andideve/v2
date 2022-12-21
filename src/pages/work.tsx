@@ -74,7 +74,7 @@ const Work = memo<PageProps>(function ({ author, projects }) {
           {({ list, shouldRenderButton, onShowMore }) => (
             <>
               <Project.List>
-                {list.map((project, i) => (
+                {list.map((project) => (
                   <Project.Item
                     key={(project as ProjectType).title}
                     {...(project as ProjectType)}
