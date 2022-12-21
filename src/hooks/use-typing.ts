@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 
-export default function useTyping(chars: string, timeout = 90) {
+export default function useTyping(chars: string, _delayPerChar = 90) {
   const [result, setResult] = useState('');
 
   const type = (char: string) => setResult((s) => s + char);
+
   const typeWithTimeout = (char: string, boostTimeout?: boolean) => {
-    const _timeout = boostTimeout ? timeout - timeout * 0.4 : timeout;
-    return setTimeout(() => type(char), _timeout);
+    const delayPerChar = boostTimeout ? _delayPerChar - _delayPerChar * 0.4 : _delayPerChar;
+    return setTimeout(() => type(char), delayPerChar);
   };
 
   useEffect(() => {
