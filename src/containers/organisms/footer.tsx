@@ -46,8 +46,8 @@ const Footer = memo<FooterProps>(function ({ brand, menuItems, quickActions = []
             display={{ _: 'grid', lg: 'flex' }}
             className="grid-cols-2 gap-y-4 gap-x-6 lg:gap-0 lg:space-x-6"
           >
-            {menuItems.map((menu, i) => (
-              <li key={i}>
+            {menuItems.map((menu) => (
+              <li key={menu.label}>
                 <Link href={menu.to} passHref>
                   <Nav.Link
                     color="foreground.secondary"

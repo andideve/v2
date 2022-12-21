@@ -60,8 +60,8 @@ const Archive = memo<PageProps>(function ({ author, projects }) {
               </tr>
             </thead>
             <tbody>
-              {projects.map((project, i) => (
-                <tr key={i} className="group">
+              {projects.map((project) => (
+                <tr key={project.title} className="group">
                   <td>
                     <Typography
                       variant="label-4"
