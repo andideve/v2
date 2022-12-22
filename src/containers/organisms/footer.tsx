@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React, { memo } from 'react';
 import { Box } from '@andideve/design-system';
 import { Navbar as Nav } from '@andideve/ds-navbar';
@@ -6,6 +5,7 @@ import { dequal } from 'dequal';
 import type { IconType } from 'react-icons';
 
 import { QuickAction, QuickActionItemProps } from '@/components/molecules/navbar/quick-action';
+import { FooterLinks } from '@/components/molecules/footer';
 import Typography from '@/components/atoms/typography';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
@@ -40,25 +40,7 @@ const Footer = memo<FooterProps>(function ({ brand, menuItems, quickActions = []
       <div className="brand-and-links footer__row lg:flex lg:items-center mt-6">
         <Nav.Brand className="brand-and-links__start">{brand}</Nav.Brand>
         <div className="brand-and-links__center footer__row--brand-and-links lg:grow lg:flex lg:justify-center mt-6 lg:mt-0 lg:mx-12">
-          <Nav.Links
-            as="ul"
-            spacing={0}
-            display={{ _: 'grid', lg: 'flex' }}
-            className="grid-cols-2 gap-y-4 gap-x-6 lg:gap-0 lg:space-x-6"
-          >
-            {menuItems.map((menu) => (
-              <li key={menu.label}>
-                <Link href={menu.to} passHref>
-                  <Nav.Link
-                    color="foreground.secondary"
-                    className="nav-link block lg:inline -mx-1 lg:mx-0"
-                  >
-                    {menu.label}
-                  </Nav.Link>
-                </Link>
-              </li>
-            ))}
-          </Nav.Links>
+          <FooterLinks items={menuItems} />
         </div>
         {quickActions.length ? (
           <div className="brand-and-links__end footer__row--brand-and-links mt-6 lg:mt-0">
