@@ -1,39 +1,29 @@
-import React, { useMemo, memo } from 'react';
+import React from 'react';
 import { FiLinkedin, FiTwitter, FiGithub, FiCodesandbox, FiDribbble } from 'react-icons/fi';
 import { FaDiscord, FaSpotify } from 'react-icons/fa';
-import type { IconType } from 'react-icons';
 
 import LinkEmbed from '@/components/molecules/link-embed';
 import Typography from '@/components/atoms/typography';
 import { Linktree } from '@/types/linktree';
 
-function getAppearance(label: string) {
-  const record: Record<string, { icon: null | IconType; color?: string }> = {
-    discord: { icon: FaDiscord },
-    linkedin: { icon: FiLinkedin },
-    twitter: { icon: FiTwitter },
-    github: { icon: FiGithub },
-    codesandbox: { icon: FiCodesandbox },
-    dribbble: { icon: FiDribbble },
-    spotify: { icon: FaSpotify },
-  };
-
-  return record[label.toLowerCase()] ?? { icon: null };
+function findIcon(label: string) {
+  return {
+    discord: FaDiscord,
+    linkedin: FiLinkedin,
+    twitter: FiTwitter,
+    github: FiGithub,
+    codesandbox: FiCodesandbox,
+    dribbble: FiDribbble,
+    spotify: FaSpotify,
+  }[label.toLowerCase()];
 }
-
-type LinkProps = Pick<Linktree['items'][0], 'label' | 'href'>;
-
-const Link = memo<LinkProps>(function ({ label, href }) {
-  const { icon } = useMemo(() => getAppearance(label), [label]);
-  return <LinkEmbed label={label} href={href} icon={icon} />;
-});
 
 function Links({ items }: Pick<Linktree, 'items'>) {
   return (
     <ul className="list-none space-y-4">
-      {items.map((link) => (
-        <li key={link.label}>
-          <Link label={link.label} href={link.href} />
+      {items.map(({ label, href }) => (
+        <li key={label}>
+          <LinkEmbed label={label} href={href} icon={findIcon(label)} />
         </li>
       ))}
     </ul>
