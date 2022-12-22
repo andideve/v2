@@ -1,6 +1,4 @@
 import { useEffect, useMemo } from 'react';
-import { FiLoader, FiMonitor, FiSun, FiMoon } from 'react-icons/fi';
-import type { IconType } from 'react-icons';
 
 import { useColorSchemeCtx } from '@/context/color-scheme';
 import useQueue from '@/hooks/use-queue';
@@ -21,18 +19,9 @@ export default function useThemeHandler() {
     if (!initializing) changeTheme(themes[themeQueue.currIndex]);
   }, [themeQueue.currIndex]);
 
-  const icon = (
-    {
-      loading: FiLoader,
-      system: FiMonitor,
-      light: FiSun,
-      dark: FiMoon,
-    } as Record<'loading' | Themes, IconType>
-  )[initializing ? 'loading' : theme];
-
   return {
     isReady: !initializing,
-    icon,
+    theme,
     onChange: initializing ? undefined : themeQueue.onNext,
   } as const;
 }

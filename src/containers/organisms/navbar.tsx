@@ -5,6 +5,7 @@ import { Navbar as Nav } from '@andideve/ds-navbar';
 import { Drawer } from '@andideve/ds-drawer';
 import { dequal } from 'dequal';
 import clsx from 'clsx';
+import { FiLoader, FiMonitor, FiSun, FiMoon } from 'react-icons/fi';
 import type { IconType } from 'react-icons';
 
 import { QuickAction, QuickActionItemProps, MobileMenu } from '@/components/molecules/navbar';
@@ -15,6 +16,7 @@ import NavLinkContainer from '@/components/molecules/navlink-container';
 import useThemeHandler from '@/hooks/use-theme-handler';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
+import { Themes } from '@/types/globals';
 
 type QuickActions = (Omit<QuickActionItemProps, 'children'> & { icon: IconType })[];
 interface NavbarProps {
@@ -35,7 +37,15 @@ function propsAreEqual(prev: NavbarProps, next: NavbarProps) {
 }
 
 function QuickActionThemeSwitcher() {
-  const { isReady, onChange, icon: SVG } = useThemeHandler();
+  const { isReady, theme, onChange } = useThemeHandler();
+  const SVG = (
+    {
+      loading: FiLoader,
+      system: FiMonitor,
+      light: FiSun,
+      dark: FiMoon,
+    } as Record<'loading' | Themes, IconType>
+  )[!isReady ? 'loading' : theme];
   return (
     <QuickAction.Item
       title={isReady ? 'Switch Theme' : 'Loading...'}
