@@ -143,11 +143,7 @@ const Navbar = memo<NavbarProps>(function ({
                 zIndex={9999}
                 unmountOnCollapse
               >
-                <MobileMenu
-                  items={menuItems}
-                  height={`calc(100vh - ${UI.navbarH})`}
-                  className="overflow-y-auto"
-                >
+                <MobileMenu items={menuItems} height={UI.mainViewH} className="overflow-y-auto">
                   {cta}
                 </MobileMenu>
               </Drawer>

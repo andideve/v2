@@ -24,7 +24,7 @@ export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
 const Links = memo<PageProps>(function ({ author, linktrees }) {
   return (
     <Page author={author} title="Links">
-      <Section spacing="1" containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
+      <Section spacing="1" containerW="sm" minHeight={UI.mainViewH}>
         <Section.Header>
           <HeaderContent
             title={

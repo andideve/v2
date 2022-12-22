@@ -86,7 +86,7 @@ const Contact = memo<PageProps>(function ({ author }) {
 
   return (
     <Page author={author} title="Contact">
-      <Section spacing="1" containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
+      <Section spacing="1" containerW="sm" minHeight={UI.mainViewH}>
         <Section.Header>
           <HeaderContent
             title={

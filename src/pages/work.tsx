@@ -31,7 +31,7 @@ const Work = memo<PageProps>(function ({ author, projects }) {
   const finder = useSearch(projects);
   return (
     <Page author={author} title="My Work">
-      <Section spacing="1" minHeight={`calc(100vh - ${UI.navbarH})`}>
+      <Section spacing="1" minHeight={UI.mainViewH}>
         <Section.Header>
           <HeaderContent
             title={
