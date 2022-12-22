@@ -22,7 +22,7 @@ import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
 import { Themes } from '@/types/globals';
 
-type QuickActions = (Omit<QuickActionItemProps, 'children'> & { icon: IconType })[];
+type QuickActions = Omit<QuickActionItemProps, 'variant'>[];
 interface NavbarProps {
   brand: string;
   menuItems: Menu[];
@@ -42,7 +42,7 @@ function propsAreEqual(prev: NavbarProps, next: NavbarProps) {
 
 function QuickActionThemeSwitcher() {
   const { isReady, theme, onChange } = useThemeHandler();
-  const SVG = (
+  const icon = (
     {
       loading: FiLoader,
       system: FiMonitor,
@@ -54,10 +54,9 @@ function QuickActionThemeSwitcher() {
     <QuickAction.Item
       title={isReady ? 'Switch Theme' : 'Loading...'}
       variant="tinted"
+      icon={icon}
       onClick={onChange}
-    >
-      <SVG strokeWidth={1.5} />
-    </QuickAction.Item>
+    />
   );
 }
 
@@ -87,10 +86,8 @@ const Navbar = memo<NavbarProps>(function ({
       </div>
       <div className="navbar__end flex space-x-8 lg:space-x-6">
         <QuickAction className="-my-3 -mx-1">
-          {quickActions.map(({ icon: SVG, ...e }, i) => (
-            <QuickAction.Item key={i} variant="plain" {...e}>
-              <SVG strokeWidth={1.5} />
-            </QuickAction.Item>
+          {quickActions.map((e, i) => (
+            <QuickAction.Item key={i} variant="plain" {...e} />
           ))}
           <QuickActionThemeSwitcher />
         </QuickAction>

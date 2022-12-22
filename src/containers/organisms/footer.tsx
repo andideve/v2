@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import { Box } from '@andideve/design-system';
 import { Navbar as Nav } from '@andideve/ds-navbar';
 import { dequal } from 'dequal';
-import type { IconType } from 'react-icons';
 
 import { QuickAction, QuickActionItemProps } from '@/components/molecules/navbar/quick-action';
 import { FooterLinks } from '@/components/molecules/footer';
@@ -10,7 +9,7 @@ import Typography from '@/components/atoms/typography';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
 
-type QuickActions = (Omit<QuickActionItemProps, 'children'> & { icon: IconType })[];
+type QuickActions = Omit<QuickActionItemProps, 'variant'>[];
 interface FooterProps {
   brand: string;
   menuItems: Menu[];
@@ -45,10 +44,8 @@ const Footer = memo<FooterProps>(function ({ brand, menuItems, quickActions = []
         {quickActions.length ? (
           <div className="brand-and-links__end footer__row--brand-and-links mt-6 lg:mt-0">
             <QuickAction className="-m-3">
-              {quickActions.map(({ icon: SVG, ...e }, i) => (
-                <QuickAction.Item key={i} variant="plain" {...e}>
-                  <SVG strokeWidth={1.5} />
-                </QuickAction.Item>
+              {quickActions.map((e, i) => (
+                <QuickAction.Item key={i} variant="plain" {...e} />
               ))}
             </QuickAction>
           </div>
