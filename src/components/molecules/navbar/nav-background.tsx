@@ -4,16 +4,16 @@ import clsx from 'clsx';
 
 export function NavBackground({
   className,
-  height,
+  ...rest
 }: { className?: string } & Pick<BoxProps, 'height'>) {
   return (
     <Box
-      height={height}
       borderColor="separator.transparent"
       className={clsx(
         'nav-background overflow-hidden border-b border-solid backdrop-blur-3xl',
         className,
       )}
+      {...rest}
     >
       <Box
         backgroundColor="background.elevated.primary"
