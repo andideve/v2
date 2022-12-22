@@ -35,7 +35,7 @@ const Hero = memo<{ author: Author }>(function ({ author }) {
   return (
     <Section
       containerW={590}
-      minHeight={`calc(100vh - ${UI.navbarH})`}
+      minHeight={UI.mainViewH}
       className="flex flex-col justify-center text-center"
     >
       <header>

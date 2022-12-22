@@ -1,19 +1,26 @@
 import { useState, useEffect } from 'react';
 
+const getBoostedDelay = (delay: number) => delay - delay * 0.4;
+
+const getUntypedChars = (from: string, typed: string) => from.substring(typed.length);
+
 export default function useTyping(chars: string, _delayPerChar = 90) {
   const [result, setResult] = useState('');
 
   const type = (char: string) => setResult((s) => s + char);
 
-  const typeWithTimeout = (char: string, boostTimeout?: boolean) => {
-    const delayPerChar = boostTimeout ? _delayPerChar - _delayPerChar * 0.4 : _delayPerChar;
+  const typeWithDelay = (char: string, boostDelay?: boolean) => {
+    const delayPerChar = boostDelay ? getBoostedDelay(_delayPerChar) : _delayPerChar;
     return setTimeout(() => type(char), delayPerChar);
   };
 
   useEffect(() => {
     if (result === chars) return;
-    const leftChars = chars.substring(result.length);
-    const timeoutId = typeWithTimeout(leftChars[0], chars.indexOf(leftChars) < 8);
+
+    const untypedChars = getUntypedChars(chars, result);
+    const shouldBoostDelay = chars.indexOf(untypedChars) < 8;
+    const timeoutId = typeWithDelay(untypedChars[0], shouldBoostDelay);
+
     return () => clearTimeout(timeoutId);
   }, [result, chars]);
 

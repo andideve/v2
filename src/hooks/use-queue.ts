@@ -1,13 +1,18 @@
 import { useState, useMemo, useCallback } from 'react';
+import runIfFn from '@/utils/client/run-if-fn';
 
 interface Options {
   repeat?: 'none' | 'all';
 }
 
-export default function useQueue(init = 0, length = 0, { repeat = 'none' }: Options = {}) {
+export default function useQueue(
+  init: number | (() => number) = 0,
+  length = 0,
+  { repeat = 'none' }: Options = {},
+) {
   const [currIndex, setCurrIndex] = useState(init);
 
-  const reset = (index = init) => setCurrIndex(index);
+  const reset = (index = init) => setCurrIndex(runIfFn(index));
 
   /** Indexes of items */
   const indexes = useMemo(() => new Array(length).fill(null).map((_, i) => i), [length]);
