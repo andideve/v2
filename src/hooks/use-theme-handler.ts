@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 
 import { useColorSchemeCtx } from '@/context/color-scheme';
 import useQueue from '@/hooks/use-queue';
@@ -8,8 +8,7 @@ export default function useThemeHandler() {
   const themes: Themes[] = ['system', 'light', 'dark'];
 
   const { initializing, theme, changeTheme } = useColorSchemeCtx();
-  const initThemeIndex = useMemo(() => themes.indexOf(theme), []);
-  const themeQueue = useQueue(initThemeIndex, themes.length, { repeat: 'all' });
+  const themeQueue = useQueue(() => themes.indexOf(theme), themes.length, { repeat: 'all' });
 
   useEffect(() => {
     if (!initializing) themeQueue.reset(themes.indexOf(theme));
