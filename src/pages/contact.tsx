@@ -19,6 +19,10 @@ type PageProps = PageDataProps;
 
 export const getServerSideProps = mergeGSSP<PageProps>(gSSP);
 
+const metadata = {
+  title: 'Contact',
+};
+
 const Contact = memo<PageProps>(function ({ author }) {
   const [loading, setLoading] = useState(false);
 
@@ -85,7 +89,7 @@ const Contact = memo<PageProps>(function ({ author }) {
   };
 
   return (
-    <Page author={author} title="Contact">
+    <Page author={author} title={metadata.title}>
       <Section spacing="1" containerW="sm" minHeight={UI.mainViewH}>
         <Section.Header>
           <HeaderContent
