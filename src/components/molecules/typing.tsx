@@ -1,12 +1,21 @@
 import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
 
 import { Typography, TypographyProps } from '@/components/atoms/typography';
 import useTyping from '@/hooks/use-typing';
-import blink from '@/styles/blink';
+
+const blinkKeyframes = keyframes({
+  '50%': { opacity: 0 },
+});
 
 const Cursor = styled.span<{ blinking?: boolean }>(
-  blink.keyframes,
-  ({ blinking }) => (blinking ? blink.css : {}),
+  blinkKeyframes.styles,
+  ({ blinking }) => {
+    if (!blinking) return {};
+    return {
+      animation: `${blinkKeyframes.name} 1.075s infinite`,
+    };
+  },
   {
     '&:after': {
       position: 'relative',
