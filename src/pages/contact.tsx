@@ -11,7 +11,7 @@ import Form from '@/containers/templates/form';
 import Typography from '@/components/atoms/typography';
 import { UI } from '@/config/globals';
 import { Email } from '@/types/email';
-import Services from '@/services';
+import Services, { CreateEmailRequestBodyParameters } from '@/services';
 
 const TextArea = StyledInput.withComponent('textarea');
 
@@ -26,8 +26,14 @@ const Contact = memo<PageProps>(function ({ author }) {
 
   const pushData = async (email: Email) => {
     setLoading(true);
+    const body: CreateEmailRequestBodyParameters = {
+      name: email.name,
+      from: email.from,
+      subject: email.subject,
+      body: email.body,
+    };
     try {
-      await Services.postEmail(email);
+      await Services.postEmail(body);
       form.reset();
       window.alert('Message was sent!');
     } catch (err) {
