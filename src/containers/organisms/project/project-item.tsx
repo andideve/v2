@@ -74,7 +74,7 @@ const ProjectItem = memo(function ({
         </div>
       ) : null}
       <footer className="absolute top-6 right-6 flex items-center h-[2.625rem]">
-        {(github || external) && <Links github={github} external={external} />}
+        <Links github={github} external={external} />
       </footer>
     </Box>
   );
