@@ -1,26 +1,25 @@
 import '../styles/globals.css';
 import { useRouter } from 'next/router';
 import type { AppProps } from 'next/app';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Global } from '@emotion/react';
 import { Provider, Theme } from '@andideve/design-system';
-import nProgress from 'nprogress';
-import 'nprogress/nprogress.css';
 
+import Progress from '@/components/molecules/progress';
 import { ColorSchemeContext } from '@/context/color-scheme';
 import globalStyles from '@/styles/globals';
-import nProgressConfig from '@/config/nprogress';
+import { UI } from '@/config/globals';
 
-const progress = nProgress.configure(nProgressConfig);
+function LoadingPageProgress() {
+  const [loading, setLoading] = useState(false);
 
-function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   useEffect(() => {
     const onRouteChangeStart = (asPath: string, { shallow }: { shallow?: boolean }) => {
-      if (!shallow) progress.start();
+      if (!shallow) setLoading(true);
     };
-    const routeChangeComplete = () => progress.done();
+    const routeChangeComplete = () => setLoading(false);
 
     router.events.on('routeChangeStart', onRouteChangeStart);
     router.events.on('routeChangeComplete', routeChangeComplete);
@@ -34,10 +33,23 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
+    <Progress
+      label="loading page progress"
+      loading={loading}
+      percentage={100}
+      className="fixed inset-x-0"
+      style={{ top: UI.navbarH, zIndex: 10000 }}
+    />
+  );
+}
+
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
     <ColorSchemeContext>
       {({ asColorScheme }) => (
         <Provider themeConfig={{ colorMode: asColorScheme }}>
           <Global styles={(theme) => globalStyles(theme as Theme)} />
+          <LoadingPageProgress />
           <Component {...pageProps} />
         </Provider>
       )}
