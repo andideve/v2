@@ -19,7 +19,7 @@ export default function useThemeHandler() {
   }, [themeQueue.currIndex]);
 
   return {
-    isReady: !initializing,
+    initializing,
     theme,
     onChange: initializing ? undefined : themeQueue.onNext,
   } as const;

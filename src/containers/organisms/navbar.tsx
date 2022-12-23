@@ -41,7 +41,7 @@ function propsAreEqual(prev: NavbarProps, next: NavbarProps) {
 }
 
 function QuickActionThemeSwitcher({ variant }: Pick<QuickActionItemProps, 'variant'>) {
-  const { isReady, theme, onChange } = useThemeHandler();
+  const { initializing, theme, onChange } = useThemeHandler();
   const icon = (
     {
       loading: FiLoader,
@@ -49,10 +49,10 @@ function QuickActionThemeSwitcher({ variant }: Pick<QuickActionItemProps, 'varia
       light: FiSun,
       dark: FiMoon,
     } as Record<'loading' | Themes, IconType>
-  )[!isReady ? 'loading' : theme];
+  )[initializing ? 'loading' : theme];
   return (
     <QuickAction.Item
-      title={isReady ? 'Switch Theme' : 'Loading...'}
+      title={initializing ? 'Switch Theme' : 'Loading...'}
       variant={variant}
       icon={icon}
       onClick={onChange}
