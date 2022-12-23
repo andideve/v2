@@ -8,6 +8,7 @@ import Section from '@/containers/templates/section';
 import HeaderContent from '@/containers/templates/header-content';
 import Tags from '@/components/molecules/tags';
 import Links from '@/components/molecules/links';
+import DateContainer from '@/components/molecules/date-container';
 import Typography from '@/components/atoms/typography';
 import TableFrame from '@/components/atoms/table-frame';
 import { UI } from '@/config/globals';
@@ -73,7 +74,9 @@ const Archive = memo<PageProps>(function ({ author, projects }) {
                       color="foreground.secondary"
                       className="lg:group-hover:text-inherit"
                     >
-                      {new Date(project.date).getFullYear()}
+                      <DateContainer date={project.date}>
+                        {({ fullYear }) => <>{fullYear}</>}
+                      </DateContainer>
                     </Typography>
                   </td>
                   <td>
