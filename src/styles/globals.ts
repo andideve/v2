@@ -1,6 +1,5 @@
 import { Theme } from '@andideve/design-system';
 import { CSSObject } from '@emotion/react';
-import { UI } from '../config/globals';
 
 const globals = ({ config: { colorMode }, colors }: Theme): CSSObject => ({
   '#__next': {
@@ -35,15 +34,6 @@ const globals = ({ config: { colorMode }, colors }: Theme): CSSObject => ({
     transition: 'color .1s ease',
     '&:focus, &.active': {
       color: 'var(--ds-colors-foreground-primary)',
-    },
-  },
-  '#nprogress .bar': {
-    top: UI.navbarH,
-    height: 1,
-    background: 'var(--ds-colors-foreground-primary)',
-    zIndex: 10000,
-    '.peg': {
-      display: 'none',
     },
   },
 });

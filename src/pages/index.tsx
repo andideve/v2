@@ -81,7 +81,7 @@ const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
           }
           description={
             <Link href={SITE_PATHS.work} passHref>
-              <Typography as="a" color="accent" className="inline-block">
+              <Typography as="a" color="accent" className="underlined inline-block">
                 view all projects
               </Typography>
             </Link>
@@ -101,6 +101,7 @@ const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
                 <Button
                   size="lg"
                   variant="gray"
+                  rounded="full"
                   iconRight={isOpen ? <FiChevronUp /> : <FiChevronDown />}
                   onClick={onToggle}
                 >

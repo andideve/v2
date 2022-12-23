@@ -9,3 +9,10 @@
 .grid-container {
   @apply grid grid-cols-4 gap-x-4 md:grid-cols-8 md:gap-x-8 lg:grid-cols-12;
 }
+
+.underlined {
+  @apply relative after:absolute after:inset-x-0 after:block after:w-0 lg:hover:after:w-full after:h-px after:bg-current;
+}
+.underlined:after {
+  transition: width 0.2s ease;
+}

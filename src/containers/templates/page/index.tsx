@@ -15,7 +15,7 @@ import Services from '@/services';
 
 const cta = (
   <Link href={SITE_PATHS.contact} passHref>
-    <Button as="a" variant="filled" iconRight={<FiArrowRight />}>
+    <Button as="a" variant="filled" rounded="full" iconRight={<FiArrowRight />}>
       Contact me
     </Button>
   </Link>

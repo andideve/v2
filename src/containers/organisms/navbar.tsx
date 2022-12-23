@@ -40,7 +40,7 @@ function propsAreEqual(prev: NavbarProps, next: NavbarProps) {
   ].every(Boolean);
 }
 
-function QuickActionThemeSwitcher() {
+function QuickActionThemeSwitcher({ variant }: Pick<QuickActionItemProps, 'variant'>) {
   const { isReady, theme, onChange } = useThemeHandler();
   const icon = (
     {
@@ -53,7 +53,7 @@ function QuickActionThemeSwitcher() {
   return (
     <QuickAction.Item
       title={isReady ? 'Switch Theme' : 'Loading...'}
-      variant="tinted"
+      variant={variant}
       icon={icon}
       onClick={onChange}
     />
@@ -84,12 +84,12 @@ const Navbar = memo<NavbarProps>(function ({
       <div className="navbar__center grow lg:absolute lg:inset-0 hidden lg:flex lg:items-center lg:justify-center">
         <NavLinks items={menuItems} />
       </div>
-      <div className="navbar__end flex space-x-8 lg:space-x-6">
+      <div className="navbar__end flex space-x-6">
         <QuickAction className="-my-3 -mx-1">
           {quickActions.map((e, i) => (
-            <QuickAction.Item key={i} variant="plain" {...e} />
+            <QuickAction.Item key={i} variant="gray" {...e} />
           ))}
-          <QuickActionThemeSwitcher />
+          <QuickActionThemeSwitcher variant="gray" />
         </QuickAction>
         <VerticalRule className="my-auto h-6" />
         <DisclosureContainer>
@@ -99,7 +99,10 @@ const Navbar = memo<NavbarProps>(function ({
               <Nav.Toggle
                 aria-controls="main-nav-drawer"
                 aria-expanded={isOpen}
-                className="-mx-3"
+                iconSize="1.125rem"
+                variant="gray"
+                rounded="full"
+                className="-mr-3"
                 expanded={isOpen}
                 onClick={onToggle}
               />

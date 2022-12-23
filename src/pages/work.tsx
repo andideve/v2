@@ -87,7 +87,13 @@ const Work = memo<PageProps>(function ({ author, projects }) {
               </Project.List>
               {shouldRenderButton && (
                 <Section.Footer className="text-center">
-                  <Button size="lg" variant="tinted" iconRight={<FiPlus />} onClick={onShowMore}>
+                  <Button
+                    size="lg"
+                    variant="gray"
+                    rounded="full"
+                    iconRight={<FiPlus />}
+                    onClick={onShowMore}
+                  >
                     Show more
                   </Button>
                 </Section.Footer>
