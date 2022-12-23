@@ -2,16 +2,16 @@ import React from 'react';
 import { IconButton, IconButtonProps } from '@andideve/design-system';
 import clsx from 'clsx';
 
-export type QuickActionItemProps = Pick<
-  IconButtonProps,
-  'children' | 'title' | 'variant' | 'onClick' | 'href' | 'external'
->;
+export interface QuickActionItemProps
+  extends Pick<IconButtonProps, 'title' | 'variant' | 'onClick' | 'href' | 'external'> {
+  icon: React.FC<React.SVGAttributes<SVGSVGElement>>;
+}
 
-function Item({ children, ...rest }: QuickActionItemProps) {
+function Item({ icon: SVG, ...rest }: QuickActionItemProps) {
   return (
     <li>
       <IconButton rounded="full" {...rest}>
-        {children}
+        <SVG strokeWidth={1.5} />
       </IconButton>
     </li>
   );

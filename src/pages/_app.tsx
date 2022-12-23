@@ -1,4 +1,3 @@
-import '../styles/sf-pro-fonts.css';
 import '../styles/globals.css';
 import { useRouter } from 'next/router';
 import type { AppProps } from 'next/app';

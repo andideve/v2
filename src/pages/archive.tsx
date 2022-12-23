@@ -26,15 +26,20 @@ export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
   },
 }));
 
+const metadata = {
+  title: 'Archive',
+  description: "A big list of things I've worked on.",
+};
+
 const Archive = memo<PageProps>(function ({ author, projects }) {
   return (
-    <Page author={author} title="Archive">
-      <Section spacing="1" minHeight={`calc(100vh - ${UI.navbarH})`}>
+    <Page author={author} title={metadata.title}>
+      <Section spacing="1" minHeight={UI.mainViewH}>
         <Section.Header>
           <HeaderContent
             title={
               <Typography as="h2" variant="title-1">
-                Archive
+                {metadata.title}
               </Typography>
             }
             description={
@@ -44,7 +49,7 @@ const Archive = memo<PageProps>(function ({ author, projects }) {
                 color="foreground.secondary"
                 className="cursor-text"
               >
-                A big list of things I&apos;ve worked on.
+                {metadata.description}
               </Typography>
             }
           />
@@ -60,8 +65,8 @@ const Archive = memo<PageProps>(function ({ author, projects }) {
               </tr>
             </thead>
             <tbody>
-              {projects.map((project, i) => (
-                <tr key={i} className="group">
+              {projects.map((project) => (
+                <tr key={project.title} className="group">
                   <td>
                     <Typography
                       variant="label-4"

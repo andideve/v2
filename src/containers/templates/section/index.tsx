@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, BoxProps, Theme } from '@andideve/design-system';
+import { useTheme } from '@emotion/react';
 import clsx from 'clsx';
 
 import { SectionContext } from './section-context';
@@ -26,12 +27,15 @@ const Section: SectionFC<SectionProps> = ({
   centered,
   ...rest
 }) => {
+  const theme = useTheme() as Theme;
+
   const spacing = (
     {
       '1': { header: UI.frameY, footer: UI.frameY },
       '2': { header: '3rem', footer: UI.frameY },
     } as Record<Spacings, { header: string; footer: string }>
   )[_spacing];
+
   return (
     <Box
       as="section"
@@ -41,7 +45,7 @@ const Section: SectionFC<SectionProps> = ({
       {...rest}
     >
       <Box
-        width={typeof _containerW === 'number' ? _containerW : `var(--ds-screens-${_containerW})`}
+        width={typeof _containerW === 'number' ? _containerW : theme.screens[_containerW]}
         className="mx-auto max-w-full"
       >
         <SectionContext value={{ spacing, centered }}>{children}</SectionContext>

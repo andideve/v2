@@ -1,17 +1,27 @@
-import React, { useMemo, memo } from 'react';
-import { Box } from '@andideve/design-system';
+import React, { memo } from 'react';
+import { Box, Theme } from '@andideve/design-system';
+import { useTheme } from '@emotion/react';
 import { FiHexagon, FiFolder, FiFile } from 'react-icons/fi';
 import { dequal } from 'dequal';
 
 import Tags from '@/components/molecules/tags';
 import Links from '@/components/molecules/links';
 import Typography from '@/components/atoms/typography';
+import { categorify, Categories } from '@/utils/client/projects';
 import { Project } from '@/types/project';
 
-function getSVG({ archived, github, external }: Pick<Project, 'archived' | 'github' | 'external'>) {
-  if (archived) return FiFolder;
-  if (github && !external) return FiHexagon;
-  return FiFile;
+function Icon({ category }: { category: Categories }) {
+  const theme = useTheme() as Theme;
+
+  const SVG = (
+    {
+      general: FiFile,
+      repository: FiHexagon,
+      archive: FiFolder,
+    } as Record<Categories, React.FC<React.SVGAttributes<SVGSVGElement>>>
+  )[category];
+
+  return <SVG strokeWidth={1} className="w-11 h-11" style={{ color: theme.colors.accent }} />;
 }
 
 function propsAreEqual(prev: Project, next: Project) {
@@ -35,7 +45,6 @@ const ProjectItem = memo(function ({
   external,
   archived,
 }: Project) {
-  const SVG = useMemo(() => getSVG({ archived, github, external }), [archived, github, external]);
   return (
     <Box
       as="article"
@@ -44,7 +53,7 @@ const ProjectItem = memo(function ({
       className="project-item relative col-span-full md:col-span-4 flex flex-col p-6 border rounded-md shadow"
     >
       <div className="mb-4 min-h-[2.625rem]">
-        <SVG strokeWidth={1} className="w-11 h-11" style={{ color: 'var(--ds-colors-accent)' }} />
+        <Icon category={categorify({ archived, github, external })} />
       </div>
       <div className="grow">
         <header className="mb-4">

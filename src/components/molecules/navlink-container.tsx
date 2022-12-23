@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import useNavlink from '@/hooks/use-navlink';
 
-export default function DisclosureContainer({
+export default function NavLinkContainer({
   children,
   to,
   exact,
 }: {
-  children: React.FC<{ active: boolean }>;
+  children: (props: { active: boolean }) => React.ReactElement;
   to: string;
   exact?: boolean;
 }) {

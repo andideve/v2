@@ -11,7 +11,7 @@ export function ColorSchemeContext({
   children,
   init,
 }: {
-  children?: React.ReactNode | React.FC<Value>;
+  children?: React.ReactNode | ((props: Value) => React.ReactElement);
   init?: ColorSchemes;
 }) {
   const { initializing, theme, asColorScheme, changeTheme } = useColorScheme(init);

@@ -27,16 +27,20 @@ export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
   },
 }));
 
+const metadata = {
+  title: 'My Work',
+};
+
 const Work = memo<PageProps>(function ({ author, projects }) {
   const finder = useSearch(projects);
   return (
-    <Page author={author} title="My Work">
-      <Section spacing="1" minHeight={`calc(100vh - ${UI.navbarH})`}>
+    <Page author={author} title={metadata.title}>
+      <Section spacing="1" minHeight={UI.mainViewH}>
         <Section.Header>
           <HeaderContent
             title={
               <Typography as="h2" variant="title-1">
-                My Work
+                {metadata.title}
               </Typography>
             }
           />
@@ -74,8 +78,11 @@ const Work = memo<PageProps>(function ({ author, projects }) {
           {({ list, shouldRenderButton, onShowMore }) => (
             <>
               <Project.List>
-                {list.map((project, i) => (
-                  <Project.Item key={i} {...(project as ProjectType)} />
+                {list.map((project) => (
+                  <Project.Item
+                    key={(project as ProjectType).title}
+                    {...(project as ProjectType)}
+                  />
                 ))}
               </Project.List>
               {shouldRenderButton && (

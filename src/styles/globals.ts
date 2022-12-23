@@ -10,7 +10,6 @@ const globals = ({ config: { colorMode }, colors }: Theme): CSSObject => ({
   },
   body: {
     cursor: 'default',
-    fontFamily: String(['"SF Pro Text"', 'var(--ds-fonts-sans)']),
     backgroundColor: colors.background.elevated.primary,
     transition: '.3s color ease, .3s background-color ease',
     '::-webkit-scrollbar': {
@@ -30,9 +29,6 @@ const globals = ({ config: { colorMode }, colors }: Theme): CSSObject => ({
   },
   hr: {
     borderTop: '1px solid var(--ds-colors-separator-default)',
-  },
-  'h1, h2, h3, h4, h5, h6': {
-    fontFamily: String(['"SF Pro Display"', 'var(--ds-fonts-sans)']),
   },
   '.nav-link': {
     color: 'var(--ds-colors-foreground-secondary)',

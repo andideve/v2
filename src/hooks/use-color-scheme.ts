@@ -2,14 +2,8 @@ import { useEffect, useReducer, Reducer } from 'react';
 
 import themeStorage from '@/utils/client/storage/theme';
 import getSystemColorScheme from '@/utils/client/system-color-scheme';
+import isValidTheme from '@/utils/client/is-valid-theme';
 import { Themes, ColorSchemes } from '@/types/globals';
-
-const THEMES_REGEX = /^(system|light|dark)$/;
-
-function isThemes(arg: any): arg is Themes {
-  if (typeof arg !== 'string') return false;
-  return THEMES_REGEX.test(arg);
-}
 
 type State = {
   readonly initializing: boolean;
@@ -26,28 +20,43 @@ const ACTION_TYPES = {
 };
 
 const reducer: Reducer<State, Action> = (state, action) => {
-  if (action.type === ACTION_TYPES.INIT_START) {
-    return {
-      ...state,
-      initializing: true,
-    };
+  switch (action.type) {
+    case ACTION_TYPES.INIT_START: {
+      return {
+        ...state,
+        initializing: true,
+      };
+    }
+    case ACTION_TYPES.INIT_DONE: {
+      return {
+        ...state,
+        initializing: false,
+      };
+    }
+    case ACTION_TYPES.CHANGE_THEME: {
+      const { theme, asColorScheme } = action.payload;
+      return {
+        ...state,
+        theme,
+        asColorScheme,
+      };
+    }
+    default: {
+      return state;
+    }
   }
-  if (action.type === ACTION_TYPES.INIT_DONE) {
-    return {
-      ...state,
-      initializing: false,
-    };
-  }
-  if (action.type === ACTION_TYPES.CHANGE_THEME) {
-    themeStorage.set(action.payload);
-    return {
-      ...state,
-      theme: action.payload,
-      asColorScheme: action.payload === 'system' ? getSystemColorScheme() : action.payload,
-    };
-  }
+};
 
-  return state;
+const ActionCreators = {
+  initStart() {
+    return { type: ACTION_TYPES.INIT_START };
+  },
+  initDone() {
+    return { type: ACTION_TYPES.INIT_DONE };
+  },
+  changeTheme(payload: Pick<State, 'theme' | 'asColorScheme'>) {
+    return { type: ACTION_TYPES.CHANGE_THEME, payload };
+  },
 };
 
 export default function useColorScheme(init: ColorSchemes = 'dark') {
@@ -58,21 +67,23 @@ export default function useColorScheme(init: ColorSchemes = 'dark') {
   } as State);
 
   const initStart = () => {
-    dispatch({ type: ACTION_TYPES.INIT_START });
+    dispatch(ActionCreators.initStart());
   };
   const initDone = () => {
-    dispatch({ type: ACTION_TYPES.INIT_DONE });
+    dispatch(ActionCreators.initDone());
   };
 
   /** Can only be called on the client */
   const changeTheme = (theme: Themes) => {
-    dispatch({ type: ACTION_TYPES.CHANGE_THEME, payload: theme });
+    const asColorScheme = theme === 'system' ? getSystemColorScheme() : theme;
+    dispatch(ActionCreators.changeTheme({ theme, asColorScheme }));
+    themeStorage.set(theme);
   };
 
   useEffect(() => {
     initStart();
     const localTheme = themeStorage.get();
-    if (isThemes(localTheme)) changeTheme(localTheme);
+    if (isValidTheme(localTheme)) changeTheme(localTheme);
     initDone();
   }, []);
 

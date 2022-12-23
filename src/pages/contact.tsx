@@ -1,34 +1,36 @@
-import React, { useCallback, useState, memo } from 'react';
-import { Box, Input, Button, StyledInput } from '@andideve/design-system';
-import { useForm } from 'react-hook-form';
+import React, { useState, memo } from 'react';
+import { Box, Button } from '@andideve/design-system';
 
 import mergeGSSP from '@/utils/server/merge-gssp';
 
 import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
 import Section from '@/containers/templates/section';
 import HeaderContent from '@/containers/templates/header-content';
-import Form from '@/containers/templates/form';
+import ContactForm, { FieldValues } from '@/containers/organisms/contact-form';
 import Typography from '@/components/atoms/typography';
 import { UI } from '@/config/globals';
-import { Email } from '@/types/email';
-import Services from '@/services';
-
-const TextArea = StyledInput.withComponent('textarea');
+import Services, { CreateEmailRequestBodyParameters } from '@/services';
 
 type PageProps = PageDataProps;
 
 export const getServerSideProps = mergeGSSP<PageProps>(gSSP);
 
+const metadata = {
+  title: 'Contact',
+};
+
 const Contact = memo<PageProps>(function ({ author }) {
   const [loading, setLoading] = useState(false);
 
-  const form = useForm<Email>();
-
-  const pushData = async (email: Email) => {
+  const pushData = async (values: FieldValues) => {
     setLoading(true);
+    const body: CreateEmailRequestBodyParameters = {
+      name: values.name,
+      from: values.email,
+      body: values.message,
+    };
     try {
-      await Services.postEmail(email);
-      form.reset();
+      await Services.postEmail(body);
       window.alert('Message was sent!');
     } catch (err) {
       console.error(err);
@@ -37,50 +39,9 @@ const Contact = memo<PageProps>(function ({ author }) {
     }
   };
 
-  const onReset = useCallback(() => {
-    form.reset();
-  }, []);
-
-  const inputs: Record<keyof Omit<Email, 'subject'>, React.ReactElement> = {
-    name: (
-      <label htmlFor="name" className="block">
-        <Input
-          type="text"
-          variant="flushed"
-          rounded={0}
-          $size="xl"
-          placeholder="What's your full name? *"
-          {...form.register('name', { required: true })}
-        />
-      </label>
-    ),
-    from: (
-      <label htmlFor="from" className="block">
-        <Input
-          type="email"
-          variant="flushed"
-          rounded={0}
-          $size="xl"
-          placeholder="Your fancy email *"
-          {...form.register('from', { required: true })}
-        />
-      </label>
-    ),
-    body: (
-      <label htmlFor="body" className="block">
-        <TextArea
-          variant="flushed"
-          placeholder="Write a Message *"
-          rows={4}
-          {...form.register('body', { required: true })}
-        />
-      </label>
-    ),
-  };
-
   return (
-    <Page author={author} title="Contact">
-      <Section spacing="1" containerW="sm" minHeight={`calc(100vh - ${UI.navbarH})`}>
+    <Page author={author} title={metadata.title}>
+      <Section spacing="1" containerW="sm" minHeight={UI.mainViewH}>
         <Section.Header>
           <HeaderContent
             title={
@@ -90,11 +51,11 @@ const Contact = memo<PageProps>(function ({ author }) {
             }
           />
         </Section.Header>
-        <Form onSubmit={form.handleSubmit(pushData)} onReset={onReset}>
-          <Form.Groups>
-            {inputs.name}
-            {inputs.from}
-          </Form.Groups>
+        <ContactForm handleSubmit={pushData}>
+          <ContactForm.Groups>
+            <ContactForm.Name />
+            <ContactForm.Email />
+          </ContactForm.Groups>
           <Box mt={UI.frameY} className="mb-12">
             <HeaderContent
               title={
@@ -114,16 +75,16 @@ const Contact = memo<PageProps>(function ({ author }) {
               }
             />
           </Box>
-          {inputs.body}
-          <Form.Footer>
+          <ContactForm.Message />
+          <ContactForm.Footer>
             <Button type="submit" size="lg" variant="filled" disabled={loading}>
               Send message
             </Button>
             <Button type="reset" size="lg" variant="plain">
               Reset form
             </Button>
-          </Form.Footer>
-        </Form>
+          </ContactForm.Footer>
+        </ContactForm>
       </Section>
     </Page>
   );

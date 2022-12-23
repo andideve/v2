@@ -1,22 +1,28 @@
 import Link from 'next/link';
 import React, { memo } from 'react';
-import { Box } from '@andideve/design-system';
 import { Navbar as Nav } from '@andideve/ds-navbar';
 import { Drawer } from '@andideve/ds-drawer';
 import { dequal } from 'dequal';
 import clsx from 'clsx';
+import { FiLoader, FiMonitor, FiSun, FiMoon } from 'react-icons/fi';
 import type { IconType } from 'react-icons';
 
-import { QuickAction, QuickActionItemProps, MobileMenu } from '@/components/molecules/navbar';
+import {
+  NavBackground,
+  NavLinks,
+  QuickAction,
+  QuickActionItemProps,
+  MobileMenu,
+} from '@/components/molecules/navbar';
 import VerticalRule from '@/components/atoms/vertical-rule';
 import WindowScrollDisabler from '@/components/molecules/window-scroll-disabler';
 import DisclosureContainer from '@/components/molecules/disclosure-container';
-import NavLinkContainer from '@/components/molecules/navlink-container';
 import useThemeHandler from '@/hooks/use-theme-handler';
 import { UI } from '@/config/globals';
 import { Menu } from '@/types/defaults';
+import { Themes } from '@/types/globals';
 
-type QuickActions = (Omit<QuickActionItemProps, 'children'> & { icon: IconType })[];
+type QuickActions = Omit<QuickActionItemProps, 'variant'>[];
 interface NavbarProps {
   brand: string;
   menuItems: Menu[];
@@ -35,15 +41,22 @@ function propsAreEqual(prev: NavbarProps, next: NavbarProps) {
 }
 
 function QuickActionThemeSwitcher() {
-  const { isReady, onChange, icon: SVG } = useThemeHandler();
+  const { isReady, theme, onChange } = useThemeHandler();
+  const icon = (
+    {
+      loading: FiLoader,
+      system: FiMonitor,
+      light: FiSun,
+      dark: FiMoon,
+    } as Record<'loading' | Themes, IconType>
+  )[!isReady ? 'loading' : theme];
   return (
     <QuickAction.Item
       title={isReady ? 'Switch Theme' : 'Loading...'}
       variant="tinted"
+      icon={icon}
       onClick={onChange}
-    >
-      <SVG strokeWidth={1.5} />
-    </QuickAction.Item>
+    />
   );
 }
 
@@ -59,55 +72,22 @@ const Navbar = memo<NavbarProps>(function ({
     <Nav
       px={UI.frameX}
       height={UI.navbarH}
-      borderColor="separator.transparent"
       zIndex={9999}
-      className={clsx('navbar justify-between border-b border-solid backdrop-blur-3xl', className)}
+      className={clsx('navbar justify-between', className)}
     >
-      <div className="navbar__bg overflow-hidden absolute inset-0">
-        <Box
-          backgroundColor="background.elevated.primary"
-          zIndex={-1}
-          className="relative opacity-90 w-full h-full"
-        />
-        <Box
-          backgroundColor="accent"
-          zIndex={-1}
-          className="relative -top-full opacity-5 w-full h-full blur-3xl"
-        />
-      </div>
-
+      <NavBackground className="absolute inset-0 -z-[1]" />
       <Nav.Brand className="navbar__start relative z-10">
         <Link href="/" passHref>
           <a className="after:absolute after:inset-0">{brand}</a>
         </Link>
       </Nav.Brand>
       <div className="navbar__center grow lg:absolute lg:inset-0 hidden lg:flex lg:items-center lg:justify-center">
-        <Nav.Links as="ul">
-          {menuItems.map((menu, i) => (
-            <li key={i}>
-              <NavLinkContainer to={menu.to} exact={menu.exact}>
-                {({ active }) => (
-                  <Link href={menu.to} passHref>
-                    <Nav.Link
-                      aria-current={active ? 'page' : undefined}
-                      color={active ? 'foreground.primary' : 'foreground.secondary'}
-                      className={clsx('nav-link', { active })}
-                    >
-                      {menu.label}
-                    </Nav.Link>
-                  </Link>
-                )}
-              </NavLinkContainer>
-            </li>
-          ))}
-        </Nav.Links>
+        <NavLinks items={menuItems} />
       </div>
       <div className="navbar__end flex space-x-8 lg:space-x-6">
         <QuickAction className="-my-3 -mx-1">
-          {quickActions.map(({ icon: SVG, ...e }, i) => (
-            <QuickAction.Item key={i} variant="plain" {...e}>
-              <SVG strokeWidth={1.5} />
-            </QuickAction.Item>
+          {quickActions.map((e, i) => (
+            <QuickAction.Item key={i} variant="plain" {...e} />
           ))}
           <QuickActionThemeSwitcher />
         </QuickAction>
@@ -133,7 +113,7 @@ const Navbar = memo<NavbarProps>(function ({
                 zIndex={9999}
                 unmountOnCollapse
               >
-                <MobileMenu items={menuItems} style={{ height: `calc(100vh - ${UI.navbarH})` }}>
+                <MobileMenu items={menuItems} height={UI.mainViewH} className="overflow-y-auto">
                   {cta}
                 </MobileMenu>
               </Drawer>
