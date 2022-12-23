@@ -75,7 +75,7 @@ const Navbar = memo<NavbarProps>(function ({
       zIndex={9999}
       className={clsx('navbar justify-between', className)}
     >
-      <NavBackground className="absolute inset-0" />
+      <NavBackground className="absolute inset-0 -z-[1]" />
       <Nav.Brand className="navbar__start relative z-10">
         <Link href="/" passHref>
           <a className="after:absolute after:inset-0">{brand}</a>
