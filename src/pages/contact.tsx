@@ -77,10 +77,10 @@ const Contact = memo<PageProps>(function ({ author }) {
           </Box>
           <ContactForm.Message />
           <ContactForm.Footer>
-            <Button type="submit" size="lg" variant="filled" disabled={loading}>
+            <Button type="submit" size="lg" variant="filled" rounded="full" disabled={loading}>
               Send message
             </Button>
-            <Button type="reset" size="lg" variant="plain">
+            <Button type="reset" size="lg" variant="plain" rounded="full">
               Reset form
             </Button>
           </ContactForm.Footer>

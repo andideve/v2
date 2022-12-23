@@ -21,7 +21,7 @@ export default function LinkEmbed({
       target="_blank"
       rel="noopener noreferrer"
       borderColor="separator.default"
-      className="link-embed group flex items-center p-3 border rounded-md"
+      className="link-embed group flex items-center p-3 border rounded-lg"
     >
       <div className="grow flex items-center">
         {SVG && <SVG className="mr-2 w-5 h-5" />}

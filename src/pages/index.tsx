@@ -101,6 +101,7 @@ const LatestProjects = memo<{ items: ProjectType[] }>(function ({ items }) {
                 <Button
                   size="lg"
                   variant="gray"
+                  rounded="full"
                   iconRight={isOpen ? <FiChevronUp /> : <FiChevronDown />}
                   onClick={onToggle}
                 >
