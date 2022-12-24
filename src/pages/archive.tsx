@@ -1,9 +1,8 @@
+import type { GetServerSideProps } from 'next';
 import React, { memo } from 'react';
 import { Table } from '@andideve/design-system';
 
-import mergeGSSP from '@/utils/server/merge-gssp';
-
-import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
+import { Page, PageDataProps } from '@/containers/templates/page';
 import Section from '@/containers/templates/section';
 import HeaderContent from '@/containers/templates/header-content';
 import Tags from '@/components/molecules/tags';
@@ -19,13 +18,14 @@ interface PageProps extends PageDataProps {
   projects: Project[];
 }
 
-export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
+export const getServerSideProps: GetServerSideProps<PageProps> = async () => ({
   props: {
+    author: await Services.getAuthor(),
     projects: await Services.getProjects({ archived: true, sort: 'DESC' }).then(
       (res) => res.projects,
     ),
   },
-}));
+});
 
 const metadata = {
   title: 'Archive',

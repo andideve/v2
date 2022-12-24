@@ -1,10 +1,9 @@
+import type { GetServerSideProps } from 'next';
 import React, { memo } from 'react';
 import { Button } from '@andideve/design-system';
 import { FiPlus } from 'react-icons/fi';
 
-import mergeGSSP from '@/utils/server/merge-gssp';
-
-import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
+import { Page, PageDataProps } from '@/containers/templates/page';
 import Section from '@/containers/templates/section';
 import HeaderContent from '@/containers/templates/header-content';
 import Project from '@/containers/organisms/project';
@@ -19,13 +18,14 @@ interface PageProps extends PageDataProps {
   projects: ProjectType[];
 }
 
-export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
+export const getServerSideProps: GetServerSideProps<PageProps> = async () => ({
   props: {
+    author: await Services.getAuthor(),
     projects: await Services.getProjects({ archived: false, sort: 'DESC' }).then(
       (res) => res.projects,
     ),
   },
-}));
+});
 
 const metadata = {
   title: 'My Work',

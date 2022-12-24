@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import type { GetServerSideProps } from 'next';
 import React from 'react';
 import { Box } from '@andideve/design-system';
 import { Button } from '@andideve/design-system';
@@ -11,7 +10,6 @@ import Footer from '@/containers/organisms/footer';
 import { SITE_PATHS, UI, EXT_LINKS } from '@/config/globals';
 import { PageMetadata, Author } from '@/types/defaults';
 import { siteMenu, extendedSiteMenu } from '../../../_data/app/site-menu';
-import Services from '@/services';
 
 const cta = (
   <Link href={SITE_PATHS.contact} passHref>
@@ -28,12 +26,6 @@ export interface PageDataProps {
 interface PageProps extends PageDataProps, PageMetadata {
   children?: React.ReactNode;
 }
-
-export const gSSP: GetServerSideProps<PageDataProps> = async () => ({
-  props: {
-    author: await Services.getAuthor(),
-  },
-});
 
 export const Page: React.FC<PageProps> = ({
   children,

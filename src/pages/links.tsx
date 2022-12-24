@@ -1,8 +1,7 @@
+import type { GetServerSideProps } from 'next';
 import React, { memo } from 'react';
 
-import mergeGSSP from '@/utils/server/merge-gssp';
-
-import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
+import { Page, PageDataProps } from '@/containers/templates/page';
 import Section from '@/containers/templates/section';
 import HeaderContent from '@/containers/templates/header-content';
 import Linktree from '@/containers/organisms/linktree';
@@ -15,11 +14,12 @@ interface PageProps extends PageDataProps {
   linktrees: LinktreeType[];
 }
 
-export const getServerSideProps = mergeGSSP<PageProps>(gSSP, async () => ({
+export const getServerSideProps: GetServerSideProps<PageProps> = async () => ({
   props: {
+    author: await Services.getAuthor(),
     linktrees: await Services.getLinktrees().then((res) => res.linktrees),
   },
-}));
+});
 
 const metadata = {
   title: 'Links',

@@ -1,9 +1,8 @@
+import type { GetServerSideProps } from 'next';
 import React, { useState, memo } from 'react';
 import { Box, Button } from '@andideve/design-system';
 
-import mergeGSSP from '@/utils/server/merge-gssp';
-
-import { Page, gSSP, PageDataProps } from '@/containers/templates/page';
+import { Page, PageDataProps } from '@/containers/templates/page';
 import Section from '@/containers/templates/section';
 import HeaderContent from '@/containers/templates/header-content';
 import ContactForm, { FieldValues } from '@/containers/organisms/contact-form';
@@ -13,7 +12,11 @@ import Services, { CreateEmailRequestBodyParameters } from '@/services';
 
 type PageProps = PageDataProps;
 
-export const getServerSideProps = mergeGSSP<PageProps>(gSSP);
+export const getServerSideProps: GetServerSideProps<PageProps> = async () => ({
+  props: {
+    author: await Services.getAuthor(),
+  },
+});
 
 const metadata = {
   title: 'Contact',
