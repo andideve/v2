@@ -102,7 +102,6 @@ const Navbar = memo<NavbarProps>(function ({
                 iconSize="1.125rem"
                 variant="gray"
                 rounded="full"
-                className="-mr-3"
                 expanded={isOpen}
                 onClick={onToggle}
               />
