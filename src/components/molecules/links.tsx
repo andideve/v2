@@ -6,8 +6,8 @@ export default function Links({ github, external }: { github?: string; external?
   return (
     <ul className="links list-none flex flex-wrap -m-3">
       {[
-        { label: 'GitHub', url: github, icon: FiGithub },
-        { label: 'External', url: external, icon: FiExternalLink },
+        { label: 'GitHub', url: github, icon: FiGithub, external: true },
+        { label: 'External', url: external, icon: FiExternalLink, external: true },
       ].map((e) => (
         <React.Fragment key={e.label}>
           {e.url && (
@@ -17,6 +17,7 @@ export default function Links({ github, external }: { github?: string; external?
                 size="lg"
                 variant="plain"
                 href={e.url}
+                external={e.external}
                 className="before:hidden"
               >
                 <e.icon />
